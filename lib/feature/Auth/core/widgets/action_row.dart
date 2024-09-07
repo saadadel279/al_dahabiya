@@ -5,9 +5,11 @@ class ActionRow extends StatelessWidget {
     super.key,
     required this.fText,
     required this.sText,
+    this.onTapforAction,
   });
   final String fText;
   final String sText;
+  final void Function()? onTapforAction;
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +20,18 @@ class ActionRow extends StatelessWidget {
           fText,
           style: const TextStyle(
             fontSize: 18,
+            color: Color.fromARGB(255, 125, 125, 126),
           ),
         ),
-        Text(
-          sText,
-          style: const TextStyle(
-            color: Colors.blue,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+        InkWell(
+          onTap: onTapforAction,
+          child: Text(
+            sText,
+            style: const TextStyle(
+              color: Colors.blue,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],

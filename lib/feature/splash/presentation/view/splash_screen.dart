@@ -11,7 +11,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocListener<SplashCubit, void>(
       listener: (context, state) {
-        GoRouter.of(context).pushReplacement(AppRouters.kHomeRoute);
+        GoRouter.of(context).pushReplacement(AppRouters.kLoginRoute);
       },
       child: Scaffold(
         backgroundColor: const Color(0xFFD04430),
