@@ -80,7 +80,10 @@ class LoginScreen extends StatelessWidget {
                             SizedBox(height: 40.h),
                             InkWell(
                                 onTap: () {
-                                  if (_formKey.currentState!.validate()) {}
+                                  if (_formKey.currentState!.validate()) {
+                                    GoRouter.of(context)
+                                        .push(AppRouters.kHomeRoute);
+                                  }
                                 },
                                 child: const CustomButton(
                                   title: 'Sign In',
