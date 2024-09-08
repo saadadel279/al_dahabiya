@@ -1,8 +1,14 @@
 import 'package:al_dahabiya/core/app_router.dart';
+import 'package:al_dahabiya/core/database/cashe_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-void main() {
+import 'core/services/locator.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
+  setupServiceLocator();
   runApp(const AlDahabiya());
 }
 
