@@ -82,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                                 onTap: () {
                                   if (_formKey.currentState!.validate()) {
                                     GoRouter.of(context)
-                                        .push(AppRouters.kHomeRoute);
+                                        .push(AppRouters.kFirstRoute);
                                   }
                                 },
                                 child: const CustomButton(
