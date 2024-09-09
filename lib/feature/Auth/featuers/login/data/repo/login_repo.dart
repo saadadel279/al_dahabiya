@@ -29,7 +29,7 @@ class LoginRepo {
     } on ServerException catch (e) {
       return left(e.errModel.message);
     } catch (e) {
-      return left(e.toString());
+      return left('something went wrong');
     }
   }
 }
