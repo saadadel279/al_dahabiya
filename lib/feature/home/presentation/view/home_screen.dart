@@ -1,11 +1,13 @@
+import 'package:al_dahabiya/core/app_router.dart';
+import 'package:al_dahabiya/core/widgets/app_page_title.dart';
 import 'package:al_dahabiya/feature/home/presentation/widgets/banner.dart';
 import 'package:al_dahabiya/feature/home/presentation/widgets/category_title_row.dart';
-import 'package:al_dahabiya/feature/home/presentation/widgets/location_badge.dart';
 import 'package:al_dahabiya/feature/home/presentation/widgets/offers_listview.dart';
 import 'package:al_dahabiya/feature/home/presentation/widgets/product_list_view.dart';
 import 'package:al_dahabiya/feature/home/presentation/widgets/search_tap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -24,13 +26,8 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   SizedBox(
                     height: 50.h,
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Directionality(
-                            textDirection: TextDirection.ltr,
-                            child: LocationBadge()),
-                      ],
+                    child: PageTitleBar(
+                      isTitlePade: false,
                     ),
                   ),
                   SizedBox(height: 15.h),
@@ -46,8 +43,13 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: 15.h),
                   const ProductListView(),
                   SizedBox(height: 15.h),
-                  const CategoryTitleRow(
-                    categoryName: 'عروض اليوم',
+                  InkWell(
+                    onTap: () {
+                      GoRouter.of(context).push(AppRouters.kOffersRoute);
+                    },
+                    child: const CategoryTitleRow(
+                      categoryName: 'عروض اليوم',
+                    ),
                   ),
                   SizedBox(height: 15.h),
                   SizedBox(

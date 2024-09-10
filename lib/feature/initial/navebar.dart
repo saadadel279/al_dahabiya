@@ -1,5 +1,8 @@
 import 'package:al_dahabiya/feature/home/presentation/view/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../offers/presentation/view/offers_screen.dart';
 
 class CustomBottomNaveBar extends StatefulWidget {
   const CustomBottomNaveBar({super.key});
@@ -9,7 +12,10 @@ class CustomBottomNaveBar extends StatefulWidget {
 }
 
 class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
-  final List<Widget> items = [const HomeScreen(), const Text('Profile')];
+  final List<Widget> items = [
+    const HomeScreen(),
+    const OffersScreen(),
+  ];
   int currentIndex = 0;
   final PageController _pageController =
       PageController(); // Add a page controller for animation
@@ -18,6 +24,8 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+        elevation: 20,
+        iconSize: 30.sp,
         currentIndex: currentIndex,
         onTap: (index) {
           setState(() {
@@ -30,21 +38,24 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
             curve: Curves.easeInOut,
           );
         },
-        selectedItemColor: Colors.white,
+        selectedItemColor: const Color(0xFFEE6A60),
         unselectedItemColor: Colors.grey,
-        backgroundColor: Colors.orangeAccent, // Set the background color
+        backgroundColor: Colors.white,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
+            icon: Icon(
+              Icons.home,
+            ),
+            label: 'الرئيسية',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(
+              Icons.favorite_border,
+            ),
+            label: 'العروض',
           ),
         ],
       ),
-      // Using PageView for animated transitions between pages
       body: PageView(
         controller: _pageController,
         onPageChanged: (index) {

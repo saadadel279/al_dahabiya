@@ -24,7 +24,7 @@ class AlDahabiya extends StatelessWidget {
         splitScreenMode: true,
         builder: (_, child) {
           return MaterialApp.router(
-            theme: ThemeData(),
+            theme: ThemeData(scaffoldBackgroundColor: Colors.white),
             routerConfig: AppRouters.router,
           );
         });

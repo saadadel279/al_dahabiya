@@ -8,9 +8,10 @@ class ItemImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(10.0),
+      borderRadius: const BorderRadius.only(
+          topRight: Radius.circular(10), bottomRight: Radius.circular(10)),
       child: Image.asset(
-        'assets/images/Logo-removebg-preview.png',
+        'assets/images/product.jpeg',
         fit: BoxFit.cover,
         width: 100,
         height: 150,

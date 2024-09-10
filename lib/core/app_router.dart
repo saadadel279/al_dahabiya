@@ -7,6 +7,7 @@ import 'package:al_dahabiya/feature/Auth/featuers/signup/presentation/view/sign_
 import 'package:al_dahabiya/feature/Auth/featuers/signup/presentation/view_model/cubit/sign_up_cubit.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/home_screen.dart';
 import 'package:al_dahabiya/feature/initial/navebar.dart';
+import 'package:al_dahabiya/feature/offers/presentation/view/offers_screen.dart';
 import 'package:al_dahabiya/feature/splash/presentation/view/splash_screen.dart';
 import 'package:al_dahabiya/feature/splash/presentation/view_model/cubit/splash_cubit.dart';
 import 'package:dio/dio.dart';
@@ -20,6 +21,7 @@ abstract class AppRouters {
   static const String kLoginRoute = '/login';
   static const String kSignUpRoute = '/signup';
   static const String kHomeRoute = '/home';
+  static const String kOffersRoute = '/offers';
 
   static final GoRouter router = GoRouter(
     routes: [
@@ -33,6 +35,10 @@ abstract class AppRouters {
       GoRoute(
         path: kFirstRoute,
         builder: (context, state) => const CustomBottomNaveBar(),
+      ),
+      GoRoute(
+        path: kOffersRoute,
+        builder: (context, state) => const OffersScreen(),
       ),
       GoRoute(
         path: kLoginRoute,
