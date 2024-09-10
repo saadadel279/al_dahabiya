@@ -37,7 +37,7 @@ class LoginScreen extends StatelessWidget {
                 isLoading = false;
                 showSnackBar(context, "Welcome!");
 
-                GoRouter.of(context).pushReplacement(AppRouters.kHomeRoute);
+                GoRouter.of(context).pushReplacement(AppRouters.kFirstRoute);
               }
             },
             builder: (context, state) {
