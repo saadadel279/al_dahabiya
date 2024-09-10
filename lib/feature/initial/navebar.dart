@@ -17,9 +17,7 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
     const OffersScreen(),
   ];
   int currentIndex = 0;
-  final PageController _pageController =
-      PageController(); // Add a page controller for animation
-
+  final PageController _pageController = PageController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
