@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 40.h,
+                    height: 50.h,
                     child: const Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -33,23 +33,23 @@ class HomeScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 15.h),
                   const SearshTap(),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 15.h),
                   const BannerImage(),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 15.h),
                   const CategoryTitleRow(
                     categoryName: 'الاصناف',
                     categoryAction: 'مشاهدة الكل',
                     categoryActionNumber: '30',
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 15.h),
                   const ProductListView(),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 15.h),
                   const CategoryTitleRow(
                     categoryName: 'عروض اليوم',
                   ),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 15.h),
                   SizedBox(
                     height: 105.h,
                     child: const OffersListView(),
