@@ -16,44 +16,46 @@ class HomeScreen extends StatelessWidget {
       textDirection: TextDirection.rtl,
       child: Scaffold(
         backgroundColor: Colors.white,
-        body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-          child: SafeArea(
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 40.h,
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Directionality(
-                          textDirection: TextDirection.ltr,
-                          child: LocationBadge()),
-                    ],
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: SafeArea(
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 50.h,
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Directionality(
+                            textDirection: TextDirection.ltr,
+                            child: LocationBadge()),
+                      ],
+                    ),
                   ),
-                ),
-                SizedBox(height: 10.h),
-                const SearshTap(),
-                SizedBox(height: 10.h),
-                const BannerImage(),
-                SizedBox(height: 10.h),
-                const CategoryTitleRow(
-                  categoryName: 'الاصناف',
-                  categoryAction: 'مشاهدة الكل',
-                  categoryActionNumber: '30',
-                ),
-                SizedBox(height: 10.h),
-                const ProductListView(),
-                SizedBox(height: 10.h),
-                const CategoryTitleRow(
-                  categoryName: 'عروض اليوم',
-                ),
-                SizedBox(height: 10.h),
-                SizedBox(
-                  height: 150.h,
-                  child: const OffersListView(),
-                ),
-              ],
+                  SizedBox(height: 15.h),
+                  const SearshTap(),
+                  SizedBox(height: 15.h),
+                  const BannerImage(),
+                  SizedBox(height: 15.h),
+                  const CategoryTitleRow(
+                    categoryName: 'الاصناف',
+                    categoryAction: 'مشاهدة الكل',
+                    categoryActionNumber: '30',
+                  ),
+                  SizedBox(height: 15.h),
+                  const ProductListView(),
+                  SizedBox(height: 15.h),
+                  const CategoryTitleRow(
+                    categoryName: 'عروض اليوم',
+                  ),
+                  SizedBox(height: 15.h),
+                  SizedBox(
+                    height: 105.h,
+                    child: const OffersListView(),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

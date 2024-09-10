@@ -28,7 +28,8 @@ class CategoryTitleRow extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 15.sp,
                 )),
-            Text(categoryActionNumber ?? '', style: TextStyle(fontSize: 14.sp)),
+            Text(categoryActionNumber != null ? " ($categoryActionNumber)" : '',
+                style: TextStyle(fontSize: 14.sp)),
           ],
         ),
       ],
