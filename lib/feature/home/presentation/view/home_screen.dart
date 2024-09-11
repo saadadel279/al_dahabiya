@@ -20,15 +20,13 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: EdgeInsets.symmetric(horizontal: 8.0.w),
             child: SafeArea(
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 50.h,
-                    child: PageTitleBar(
-                      isTitlePade: false,
-                    ),
+                  SizedBox(height: 15.h),
+                  PageTitleBar(
+                    isTitlePade: false,
                   ),
                   SizedBox(height: 15.h),
                   const SearshTap(),

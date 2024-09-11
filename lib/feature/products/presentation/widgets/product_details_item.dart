@@ -32,7 +32,7 @@ class ProductDetailsItem extends StatelessWidget {
               'ب 120 ج.م/2قطعة',
               textAlign: TextAlign.end,
               style: TextStyle(
-                fontSize: 14.sp,
+                fontSize: 12.sp,
                 color: Colors.grey[600],
               ),
             ),
