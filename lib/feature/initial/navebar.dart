@@ -13,13 +13,14 @@ class CustomBottomNaveBar extends StatefulWidget {
 }
 
 class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
+  int currentIndex = 0;
+
   final List<Widget> items = [
     const HomeScreen(),
     const OffersScreen(),
     const ProductsScreen(),
   ];
-  int currentIndex = 0;
-  final PageController _pageController = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,12 +32,6 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
           setState(() {
             currentIndex = index;
           });
-          // Animate to the selected page
-          _pageController.animateToPage(
-            index,
-            duration: const Duration(milliseconds: 100),
-            curve: Curves.easeInOut,
-          );
         },
         selectedItemColor: const Color(0xFFEE6A60),
         unselectedItemColor: Colors.grey,
@@ -62,21 +57,7 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
           ),
         ],
       ),
-      body: PageView(
-        controller: _pageController,
-        onPageChanged: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
-        children: items,
-      ),
+      body: items[currentIndex], // Directly display the selected widget
     );
-  }
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
   }
 }
