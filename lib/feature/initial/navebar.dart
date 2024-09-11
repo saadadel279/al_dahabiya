@@ -1,4 +1,5 @@
 import 'package:al_dahabiya/feature/home/presentation/view/home_screen.dart';
+import 'package:al_dahabiya/feature/products/presentation/view/products_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -15,6 +16,7 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
   final List<Widget> items = [
     const HomeScreen(),
     const OffersScreen(),
+    const ProductsScreen(),
   ];
   int currentIndex = 0;
   final PageController _pageController = PageController();
@@ -51,6 +53,12 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
               Icons.favorite_border,
             ),
             label: 'العروض',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.grid_view_outlined,
+            ),
+            label: 'الاصناف',
           ),
         ],
       ),
