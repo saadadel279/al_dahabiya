@@ -57,7 +57,7 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
           ),
         ],
       ),
-      body: items[currentIndex], // Directly display the selected widget
+      body: items[currentIndex],
     );
   }
 }

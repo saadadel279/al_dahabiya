@@ -14,23 +14,23 @@ class ProductDetailsItem extends StatelessWidget {
           children: [
             Image.asset(
               'assets/images/product_feat.jpg',
-              fit: BoxFit.contain,
+              fit: BoxFit.fill,
+              height: 95.h,
             ),
             SizedBox(height: 5.h),
             // Product Name
             Text(
               'حذاء رياضي',
-              textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 5.h),
-            // Product Description (e.g. size, weight, etc.)
+
             Text(
-              'ب 120 ج.م / 2قطعة',
-              textAlign: TextAlign.center,
+              'ب 120 ج.م/2قطعة',
+              textAlign: TextAlign.end,
               style: TextStyle(
                 fontSize: 14.sp,
                 color: Colors.grey[600],
