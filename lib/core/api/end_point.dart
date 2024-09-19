@@ -2,6 +2,8 @@ class EndPoint {
   static const String baseUrl = 'http://walker-stores.com/api/';
   static const String login = 'login';
   static const String signUp = 'signup';
+  static const String getCategories = 'categories';
+  static const String getLatestOffers = 'latest_offers';
 }
 
 class ApiKey {

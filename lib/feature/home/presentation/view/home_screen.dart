@@ -1,11 +1,16 @@
+import 'package:al_dahabiya/core/api/dio_consumer.dart';
 import 'package:al_dahabiya/core/app_router.dart';
 import 'package:al_dahabiya/core/widgets/app_page_title.dart';
+import 'package:al_dahabiya/feature/home/data/repo/categories_repo.dart';
+import 'package:al_dahabiya/feature/home/presentation/view_model/categories_cubit/categories_cubit.dart';
 import 'package:al_dahabiya/feature/home/presentation/widgets/banner.dart';
 import 'package:al_dahabiya/feature/home/presentation/widgets/category_title_row.dart';
 import 'package:al_dahabiya/feature/home/presentation/widgets/offers_listview.dart';
 import 'package:al_dahabiya/feature/home/presentation/widgets/product_list_view.dart';
 import 'package:al_dahabiya/feature/home/presentation/widgets/search_tap.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
@@ -39,7 +44,12 @@ class HomeScreen extends StatelessWidget {
                     categoryActionNumber: '30',
                   ),
                   SizedBox(height: 15.h),
-                  const ProductListView(),
+                  BlocProvider(
+                    create: (context) => CategoriesCubit(
+                        CategoriesRepo(apiServices: DioConsumer(dio: Dio())))
+                      ..getCategories(),
+                    child: const CategoriesListView(),
+                  ),
                   SizedBox(height: 15.h),
                   InkWell(
                     onTap: () {
