@@ -3,10 +3,14 @@ import 'package:al_dahabiya/feature/home/presentation/widgets/item_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../data/models/offers_model.dart';
+
 class OfferListItem extends StatelessWidget {
   const OfferListItem({
     super.key,
+    this.offer,
   });
+  final Offer? offer;
 
   @override
   Widget build(BuildContext context) {
@@ -24,13 +28,18 @@ class OfferListItem extends StatelessWidget {
         child: SizedBox(
           height: 105.h,
           width: 250.w,
-          child: const Row(
+          child: Row(
             children: [
-              Expanded(child: ItemImage()),
+              Expanded(
+                  child: ItemImage(
+                offer: offer,
+              )),
               Expanded(
                 child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: ItemData(),
+                  padding: const EdgeInsets.all(8.0),
+                  child: ItemData(
+                    offer: offer,
+                  ),
                 ),
               ),
             ],

@@ -1,4 +1,5 @@
-import 'package:al_dahabiya/feature/home/data/models/categories_model.dart';
+import 'package:al_dahabiya/feature/home/data/models/brands_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,15 +8,17 @@ class CategoryItem extends StatelessWidget {
     super.key,
     required this.categories,
   });
-  final Category categories;
+  final Brand categories;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Expanded(
-          child: Image.network(
-            'https://walker-stores.com/api/categories${categories.image}',
-            fit: BoxFit.cover,
+          child: CachedNetworkImage(
+            imageUrl:
+                'https://walker-stores.com/api/categories${categories.image}',
+            placeholder: (context, url) =>
+                const Center(child: Icon(Icons.error)),
           ),
         ),
         SizedBox(height: 5.h),

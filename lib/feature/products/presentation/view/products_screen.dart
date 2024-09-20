@@ -9,7 +9,7 @@ import 'package:go_router/go_router.dart';
 class ProductsScreen extends StatelessWidget {
   const ProductsScreen({super.key, this.id});
 
-  final String? id;
+  final int? id;
 
   @override
   Widget build(BuildContext context) {

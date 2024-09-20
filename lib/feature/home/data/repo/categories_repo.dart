@@ -1,20 +1,20 @@
 import 'package:al_dahabiya/core/api/api_services.dart';
 import 'package:al_dahabiya/core/api/end_point.dart';
 import 'package:al_dahabiya/core/error/exceptions.dart';
-import 'package:al_dahabiya/feature/home/data/models/categories_model.dart';
+import 'package:al_dahabiya/feature/home/data/models/brands_model.dart';
 import 'package:dartz/dartz.dart';
 
-class CategoriesRepo {
+class BrandsRepo {
   final ApiServices apiServices;
-  CategoriesModel? categoriesModel;
+  BrandsModel? brandsModel;
 
-  CategoriesRepo({required this.apiServices});
-  Future<Either<String, CategoriesModel>> getCategories() async {
+  BrandsRepo({required this.apiServices});
+  Future<Either<String, BrandsModel>> getCategories() async {
     try {
-      var response = await apiServices.get(EndPoint.getCategories);
+      var response = await apiServices.get(EndPoint.getBrands);
       if (response['code'] == 200) {
-        categoriesModel = CategoriesModel.fromJson(response);
-        return right(categoriesModel!);
+        brandsModel = BrandsModel.fromJson(response);
+        return right(brandsModel!);
       } else {
         return left(response['message']);
       }

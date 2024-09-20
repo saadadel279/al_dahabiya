@@ -1,10 +1,10 @@
 class OffersModel {
-  int code;
-  List<Offer> data;
+  int? code;
+  List<Offer>? data;
 
   OffersModel({
-    required this.code,
-    required this.data,
+    this.code,
+    this.data,
   });
 
   factory OffersModel.fromJson(Map<String, dynamic> json) {
@@ -17,14 +17,14 @@ class OffersModel {
 }
 
 class Offer {
-  int id;
-  String name;
-  String image;
+  int? id;
+  String? name;
+  String? image;
 
   Offer({
-    required this.id,
-    required this.name,
-    required this.image,
+    this.id,
+    this.name,
+    this.image,
   });
 
   factory Offer.fromJson(Map<String, dynamic> json) {

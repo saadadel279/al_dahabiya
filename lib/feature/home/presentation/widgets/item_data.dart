@@ -1,35 +1,38 @@
 import 'package:flutter/material.dart';
 
+import '../../data/models/offers_model.dart';
+
 class ItemData extends StatelessWidget {
   const ItemData({
     super.key,
+    this.offer,
   });
-
+  final Offer? offer;
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          'عروض السوبر ال 5 قطع',
-          style: TextStyle(
+          offer?.name ?? 'عرض ال 5 فطع',
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
         ),
-        SizedBox(height: 5),
+        const SizedBox(height: 5),
         Text(
-          '5 قطع',
-          style: TextStyle(
+          offer?.name ?? '5 قطع',
+          style: const TextStyle(
             fontSize: 12,
             color: Colors.grey,
           ),
         ),
-        SizedBox(height: 5),
-        Row(
+        const SizedBox(height: 5),
+        const Row(
           children: [
             Text(
               '12\$',
