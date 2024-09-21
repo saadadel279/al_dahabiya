@@ -15,7 +15,11 @@ class ItemImage extends StatelessWidget {
           topRight: Radius.circular(10), bottomRight: Radius.circular(10)),
       child: CachedNetworkImage(
         imageUrl: offer!.image!,
-        placeholder: (context, url) => const Center(child: Icon(Icons.error)),
+        placeholder: (context, url) =>
+            const Center(child: CircularProgressIndicator()),
+        errorWidget: (context, url, error) =>
+            const Center(child: Icon(Icons.error)),
+        fit: BoxFit.fill,
       ),
     );
   }

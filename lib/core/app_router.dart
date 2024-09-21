@@ -9,7 +9,10 @@ import 'package:al_dahabiya/feature/home/presentation/view/home_screen.dart';
 import 'package:al_dahabiya/feature/initial/navebar.dart';
 import 'package:al_dahabiya/feature/offers/presentation/view/offers_screen.dart';
 import 'package:al_dahabiya/feature/product_details/presentation/view/product_details_screen.dart';
+import 'package:al_dahabiya/feature/products/data/models/brand_product_model.dart';
+import 'package:al_dahabiya/feature/products/data/repo/brand_product_repo.dart';
 import 'package:al_dahabiya/feature/products/presentation/view/products_screen.dart';
+import 'package:al_dahabiya/feature/products/presentation/view_model/cubit/brand_products_cubit.dart';
 import 'package:al_dahabiya/feature/splash/presentation/view/splash_screen.dart';
 import 'package:al_dahabiya/feature/splash/presentation/view_model/cubit/splash_cubit.dart';
 import 'package:dio/dio.dart';
@@ -44,15 +47,24 @@ abstract class AppRouters {
         path: kProductScreenRoute,
         builder: (context, state) {
           final productId = state.extra! as int;
-          return ProductsScreen(
-            id: productId,
+          return BlocProvider(
+            create: (context) => BrandProductsCubit(
+                BrandProductRepo(apiServices: DioConsumer(dio: Dio())))
+              ..grtBrandProducts(productId),
+            child: ProductsScreen(
+              id: productId,
+            ),
           );
         },
       ),
       GoRoute(
-        path: kProductDetailsRoute,
-        builder: (context, state) => const ProductDetailsScreen(),
-      ),
+          path: kProductDetailsRoute,
+          builder: (context, state) {
+            final product = state.extra! as ProductOfBrand;
+            return ProductDetailsScreen(
+              productOfBrand: product,
+            );
+          }),
       GoRoute(
         path: kOffersRoute,
         builder: (context, state) => const OffersScreen(),

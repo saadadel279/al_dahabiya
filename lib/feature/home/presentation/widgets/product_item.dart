@@ -15,9 +15,10 @@ class CategoryItem extends StatelessWidget {
       children: [
         Expanded(
           child: CachedNetworkImage(
-            imageUrl:
-                'https://walker-stores.com/api/categories${categories.image}',
+            imageUrl: 'https://walker-stores.com/api/${categories.image}',
             placeholder: (context, url) =>
+                const Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) =>
                 const Center(child: Icon(Icons.error)),
           ),
         ),

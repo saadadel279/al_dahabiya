@@ -1,13 +1,17 @@
 import 'package:al_dahabiya/feature/product_details/presentation/view/widgets/product_titile_section.dart';
+import 'package:al_dahabiya/feature/products/data/models/brand_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'widgets/product_details_section.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  const ProductDetailsScreen({super.key, this.prandId});
-  final int? prandId;
+  const ProductDetailsScreen({
+    super.key,
+    this.productOfBrand,
+  });
 
+  final ProductOfBrand? productOfBrand;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -35,16 +39,17 @@ class ProductDetailsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       const SizedBox(height: 90),
-                      const ProductDetailsSection(
+                      ProductDetailsSection(
                         isCounter: false,
                         detailsTitle: 'الخامات',
-                        details: 'مصنوع من البلاستيك المقوى',
+                        details:
+                            productOfBrand!.desc ?? 'مصنوع من البلاستيك المقوى',
                       ),
                       SizedBox(height: 20.h),
-                      const ProductDetailsSection(
+                      ProductDetailsSection(
                         isCounter: false,
                         detailsTitle: 'وصف المنتج',
-                        details:
+                        details: productOfBrand!.desc ??
                             'دلو يستخدم لتذويب المعقمات بإستخدام وسائل التنظبف في الماء عند المسح  العلامة التجارية : الهلال والنجمة',
                       ),
                       SizedBox(height: 20.h),
@@ -75,7 +80,9 @@ class ProductDetailsScreen extends StatelessWidget {
               ),
               Positioned(
                 top: -100.h,
-                child: const ProductTitelSection(),
+                child: ProductTitelSection(
+                  productOfBrand: productOfBrand,
+                ),
               )
             ],
           ),
