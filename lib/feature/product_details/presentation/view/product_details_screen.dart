@@ -1,7 +1,9 @@
+import 'package:al_dahabiya/core/app_router.dart';
 import 'package:al_dahabiya/feature/product_details/presentation/view/widgets/product_titile_section.dart';
 import 'package:al_dahabiya/feature/products/data/models/brand_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import 'widgets/product_details_section.dart';
 
@@ -59,20 +61,26 @@ class ProductDetailsScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 20.h),
                       Center(
-                        child: Container(
-                            height: 30.h,
-                            width: 150.w,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFFB13E55),
-                              borderRadius: BorderRadius.circular(50),
-                            ),
-                            child: Center(
-                              child: Text(
-                                'إضافة الى السلة',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 16.sp),
+                        child: InkWell(
+                          onTap: () {
+                            GoRouter.of(context)
+                                .push(AppRouters.kCartScreenRoute);
+                          },
+                          child: Container(
+                              height: 30.h,
+                              width: 150.w,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFFB13E55),
+                                borderRadius: BorderRadius.circular(50),
                               ),
-                            )),
+                              child: Center(
+                                child: Text(
+                                  'إضافة الى السلة',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 16.sp),
+                                ),
+                              )),
+                        ),
                       ),
                     ],
                   ),

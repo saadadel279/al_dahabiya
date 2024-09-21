@@ -5,6 +5,7 @@ import 'package:al_dahabiya/feature/Auth/featuers/login/presentation/view_mode/c
 import 'package:al_dahabiya/feature/Auth/featuers/signup/data/repo/Sign_up_repo.dart';
 import 'package:al_dahabiya/feature/Auth/featuers/signup/presentation/view/sign_up_screen.dart';
 import 'package:al_dahabiya/feature/Auth/featuers/signup/presentation/view_model/cubit/sign_up_cubit.dart';
+import 'package:al_dahabiya/feature/cart/presentation/view/cart_screen.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/home_screen.dart';
 import 'package:al_dahabiya/feature/initial/navebar.dart';
 import 'package:al_dahabiya/feature/offers/presentation/view/offers_screen.dart';
@@ -29,6 +30,7 @@ abstract class AppRouters {
   static const String kOffersRoute = '/offers';
   static const String kProductDetailsRoute = '/productDetails';
   static const String kProductScreenRoute = '/ProductsScreen';
+  static const String kCartScreenRoute = '/CartScreen';
 
   static final GoRouter router = GoRouter(
     routes: [
@@ -42,6 +44,10 @@ abstract class AppRouters {
       GoRoute(
         path: kFirstRoute,
         builder: (context, state) => const CustomBottomNaveBar(),
+      ),
+      GoRoute(
+        path: kCartScreenRoute,
+        builder: (context, state) => const CartScreen(),
       ),
       GoRoute(
         path: kProductScreenRoute,
