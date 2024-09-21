@@ -15,36 +15,37 @@ class ProductTitelSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.w),
-      child: Row(crossAxisAlignment: CrossAxisAlignment.end, children: [
-        Column(
+      child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(
-              productOfBrand?.name ?? 'دلو بلاستيك',
-              style: TextStyle(
-                  fontSize: 18.sp,
-                  color: const Color.fromARGB(255, 214, 213, 213)),
+            Column(
+              children: [
+                Text(
+                  productOfBrand?.name ?? 'دلو بلاستيك',
+                  style: TextStyle(
+                      fontSize: 18.sp,
+                      color: const Color.fromARGB(255, 214, 213, 213)),
+                ),
+                Text(
+                  productOfBrand?.type ?? 'للقمامة',
+                  style: TextStyle(
+                      fontSize: 18.sp,
+                      color: const Color.fromARGB(255, 255, 255, 255)),
+                ),
+                const StarRow(),
+                Text(
+                  '${productOfBrand?.review} votes',
+                  style: TextStyle(
+                      fontSize: 12.sp,
+                      color: const Color.fromARGB(255, 12, 10, 10)),
+                ),
+                PriceContainer(
+                  productOfBrand: productOfBrand,
+                ),
+              ],
             ),
-            Text(
-              productOfBrand?.type ?? 'للقمامة',
-              style: TextStyle(
-                  fontSize: 18.sp,
-                  color: const Color.fromARGB(255, 255, 255, 255)),
-            ),
-            const StarRow(),
-            Text(
-              '${productOfBrand?.review} votes',
-              style: TextStyle(
-                  fontSize: 12.sp,
-                  color: const Color.fromARGB(255, 12, 10, 10)),
-            ),
-            PriceContainer(
-              productOfBrand: productOfBrand,
-            ),
-          ],
-        ),
-        SizedBox(width: 20.w),
-        Column(
-          children: [
+            SizedBox(width: 20.w),
             CachedNetworkImage(
               imageUrl:
                   'https://walker-stores.com/api/${productOfBrand?.image}',
@@ -52,14 +53,12 @@ class ProductTitelSection extends StatelessWidget {
                   const Center(child: CircularProgressIndicator()),
               errorWidget: (context, url, error) => Image.asset(
                 'assets/images/product.jpeg',
-                height: 150,
-                width: 150,
+                height: 130.h,
+                width: 150.w,
                 fit: BoxFit.cover,
               ),
-            ),
-          ],
-        )
-      ]),
+            )
+          ]),
     );
   }
 }

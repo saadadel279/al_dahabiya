@@ -11,8 +11,8 @@ class PriceContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 52,
-      width: 180,
+      height: 45.h,
+      width: 130.w,
       decoration: const BoxDecoration(
         color: Color(0xFFB13E55),
         borderRadius: BorderRadius.only(

@@ -35,21 +35,21 @@ class CartScreen extends StatelessWidget {
                           return Directionality(
                             textDirection: TextDirection.rtl,
                             child: Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
+                              padding: EdgeInsets.only(bottom: 15.h),
                               child: Container(
                                 decoration: const BoxDecoration(
                                   color: Color(0xFFF5E3E7),
                                 ),
-                                margin: const EdgeInsets.symmetric(
-                                  vertical: 4,
-                                  horizontal: 5,
+                                margin: EdgeInsets.symmetric(
+                                  vertical: 4.h,
+                                  horizontal: 5.w,
                                 ),
                                 child: Card(
                                   color: Colors.white,
-                                  margin: const EdgeInsets.symmetric(
-                                      horizontal: 16, vertical: 8),
+                                  margin: EdgeInsets.symmetric(
+                                      horizontal: 16.w, vertical: 8.h),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: EdgeInsets.all(8.0.sp),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -58,20 +58,20 @@ class CartScreen extends StatelessWidget {
                                           children: [
                                             Image.asset(
                                               item.imageUrl,
-                                              width: 50,
-                                              height: 50,
+                                              width: 50.w,
+                                              height: 50.h,
                                             ),
-                                            const SizedBox(width: 50),
+                                            SizedBox(width: 10.w),
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
                                               children: [
                                                 Text(
                                                   item.name,
-                                                  style: const TextStyle(
-                                                      fontSize: 18),
+                                                  style: TextStyle(
+                                                      fontSize: 18.sp),
                                                 ),
-                                                const SizedBox(height: 4),
+                                                SizedBox(height: 4.h),
                                                 Text(
                                                   "${item.price} ج.م",
                                                   style: const TextStyle(
@@ -92,20 +92,20 @@ class CartScreen extends StatelessWidget {
                                                     BorderRadius.circular(10),
                                               ),
                                               child: IconButton(
-                                                iconSize: 26,
+                                                iconSize: 26.sp,
                                                 icon: const Icon(Icons.remove),
                                                 onPressed: () => context
                                                     .read<CartCubit>()
                                                     .decrementQuantity(index),
                                               ),
                                             ),
-                                            const SizedBox(width: 16),
+                                            SizedBox(width: 16.w),
                                             Text(
                                               '${item.quantity}',
                                               style:
                                                   const TextStyle(fontSize: 18),
                                             ),
-                                            const SizedBox(width: 16),
+                                            SizedBox(width: 16.w),
                                             Container(
                                               decoration: BoxDecoration(
                                                 color: const Color(0xFFB0EAFD),
@@ -113,7 +113,7 @@ class CartScreen extends StatelessWidget {
                                                     BorderRadius.circular(10),
                                               ),
                                               child: IconButton(
-                                                iconSize: 26,
+                                                iconSize: 26.sp,
                                                 icon: const Icon(Icons.add),
                                                 onPressed: () => context
                                                     .read<CartCubit>()
@@ -135,7 +135,7 @@ class CartScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
                   child: BlocBuilder<CartCubit, List<CartItemModel>>(
                     builder: (context, cartItems) {
                       final totalPrice =
@@ -147,35 +147,33 @@ class CartScreen extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                const Text(
+                                Text(
                                   'المجموع: ',
                                   style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: 20.sp,
                                       fontWeight: FontWeight.bold),
                                 ),
                                 Text(
                                   ' ${totalPrice.toStringAsFixed(2)} ج.م',
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       color: Colors.red,
-                                      fontSize: 20,
+                                      fontSize: 20.sp,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
                             SizedBox(
-                              width: 150,
-                              height: 50,
+                              width: 150.w,
+                              height: 45.h,
                               child: ElevatedButton(
                                 onPressed: () {},
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFFB13E55),
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 15),
                                 ),
                                 child: const Text(
                                   'شراء',
                                   style: TextStyle(
-                                      fontSize: 18, color: Colors.white),
+                                      fontSize: 22, color: Colors.white),
                                 ),
                               ),
                             ),

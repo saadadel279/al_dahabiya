@@ -36,11 +36,11 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  padding: EdgeInsets.symmetric(horizontal: 20.w),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const SizedBox(height: 90),
+                      SizedBox(height: 80.h),
                       ProductDetailsSection(
                         isCounter: false,
                         detailsTitle: 'الخامات',
