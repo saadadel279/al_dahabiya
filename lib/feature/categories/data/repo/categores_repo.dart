@@ -1,27 +1,28 @@
 import 'package:al_dahabiya/core/api/api_services.dart';
 import 'package:al_dahabiya/core/api/end_point.dart';
 import 'package:al_dahabiya/core/error/exceptions.dart';
-import 'package:al_dahabiya/feature/home/data/models/offers_model.dart';
 import 'package:dartz/dartz.dart';
 
-class OfferRepo {
-  final ApiServices apiServices;
-  OffersModel? offersModel;
+import '../models/categories_model.dart';
 
-  OfferRepo({required this.apiServices});
-  Future<Either<String, OffersModel?>> getOffers() async {
+class CategoresRepo {
+  final ApiServices apiServices;
+  CategoriesModel? categoriesModel;
+
+  CategoresRepo({required this.apiServices});
+  Future<Either<String, CategoriesModel?>> getCategories() async {
     try {
-      var response = await apiServices.get(EndPoint.getLatestOffers);
+      var response = await apiServices.get(EndPoint.getCategories);
       if (response['code'] == 200) {
-        offersModel = OffersModel.fromJson(response);
-        return right(offersModel!);
+        categoriesModel = CategoriesModel.fromJson(response);
+        return right(categoriesModel);
       } else {
         return left(response['message']);
       }
     } on ServerException catch (e) {
       return left(e.errModel.message);
     } catch (e) {
-      return left('something went wrong');
+      return left(e.toString());
     }
   }
 }

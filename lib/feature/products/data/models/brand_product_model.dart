@@ -16,7 +16,7 @@ class BrandProductsModel {
 
 class ProductOfBrand {
   final int? id;
-  final String? name;
+  final String name;
   final String? image;
   final String? type;
   final int? quantity;
@@ -38,7 +38,7 @@ class ProductOfBrand {
 
   ProductOfBrand({
     this.id,
-    this.name,
+    required this.name,
     this.image,
     this.type,
     this.quantity,
@@ -106,11 +106,11 @@ class ProductOfBrand {
 
 class Category {
   final int? id;
-  final String? name;
-  final String? image;
+  final String name;
+  final String image;
   final int? inHomePage;
 
-  Category({this.id, this.name, this.image, this.inHomePage});
+  Category({this.id, required this.name, required this.image, this.inHomePage});
 
   factory Category.fromJson(Map<String, dynamic> json) {
     return Category(
@@ -147,10 +147,10 @@ class ProductImage {
 
 class Attribute {
   final int? id;
-  final String? name;
+  final String name;
   final String? value;
 
-  Attribute({this.id, this.name, this.value});
+  Attribute({this.id, required this.name, this.value});
 
   factory Attribute.fromJson(Map<String, dynamic> json) {
     return Attribute(

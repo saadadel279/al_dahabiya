@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../data/models/offers_model.dart';
+import '../../../offers/data/models/offers_model.dart';
 
 class ItemData extends StatelessWidget {
   const ItemData({

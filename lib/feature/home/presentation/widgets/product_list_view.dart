@@ -32,8 +32,8 @@ class CategoriesListView extends StatelessWidget {
                       GoRouter.of(context).push(AppRouters.kProductScreenRoute,
                           extra: state.categoriesModel!.data[index].id);
                     },
-                    child: CategoryItem(
-                      categories: state.categoriesModel!.data[index],
+                    child: BrandItem(
+                      brand: state.categoriesModel!.data[index],
                     ));
               },
             );

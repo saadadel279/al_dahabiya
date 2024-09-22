@@ -3,7 +3,7 @@ import 'package:al_dahabiya/feature/home/presentation/widgets/item_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/models/offers_model.dart';
+import '../../../offers/data/models/offers_model.dart';
 
 class OfferListItem extends StatelessWidget {
   const OfferListItem({

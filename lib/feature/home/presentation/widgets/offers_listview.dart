@@ -1,5 +1,5 @@
-import 'package:al_dahabiya/feature/home/presentation/view_model/offers_cubit/offers_cubit.dart';
 import 'package:al_dahabiya/feature/home/presentation/widgets/offer_list_item.dart';
+import 'package:al_dahabiya/feature/offers/presentation/view_model/offers_cubit/offers_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
