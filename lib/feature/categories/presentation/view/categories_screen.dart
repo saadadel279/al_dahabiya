@@ -1,4 +1,5 @@
 import 'package:al_dahabiya/core/api/dio_consumer.dart';
+import 'package:al_dahabiya/core/app_router.dart';
 import 'package:al_dahabiya/core/models/category_model.dart';
 import 'package:al_dahabiya/core/widgets/app_page_title.dart';
 import 'package:al_dahabiya/feature/categories/data/repo/categories_repo.dart';
@@ -8,6 +9,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
@@ -40,9 +42,18 @@ class CategoriesScreen extends StatelessWidget {
                               itemCount:
                                   state.categoryResponseModel!.data.length,
                               itemBuilder: (context, index) {
-                                return CategoryItemTitle(
-                                  category:
-                                      state.categoryResponseModel!.data[index],
+                                return InkWell(
+                                  onTap: () {
+                                    GoRouter.of(context).push(
+                                      AppRouters.kSubCategoriesScreenRoute,
+                                      extra: state.categoryResponseModel!
+                                          .data[index].id,
+                                    );
+                                  },
+                                  child: CategoryItemTitle(
+                                    category: state
+                                        .categoryResponseModel!.data[index],
+                                  ),
                                 );
                               });
                         } else if (state is CategoriesFailure) {
@@ -75,15 +86,21 @@ class CategoryItemTitle extends StatelessWidget {
     return Column(
       children: [
         CachedNetworkImage(
+            placeholder: (context, url) =>
+                const Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) =>
+                const Center(child: Icon(Icons.error)),
             width: double.infinity,
+            fit: BoxFit.fill,
+            height: 200.h,
             imageUrl: 'http://walker-stores.com/images/${category.image!}'),
-        SizedBox(height: 15.w),
+        SizedBox(height: 15.h),
         Text(
           category.name!,
           style: TextStyle(fontSize: 25.sp),
           textAlign: TextAlign.center,
         ),
-        SizedBox(height: 15.w),
+        SizedBox(height: 15.h),
       ],
     );
   }
