@@ -1,9 +1,9 @@
-import 'package:al_dahabiya/feature/home/presentation/widgets/item_data.dart';
-import 'package:al_dahabiya/feature/home/presentation/widgets/item_image.dart';
+import 'package:al_dahabiya/feature/home/presentation/view/widgets/item_data.dart';
+import 'package:al_dahabiya/feature/home/presentation/view/widgets/item_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../data/models/offers_model.dart';
+import '../../../../../core/models/offers_model.dart';
 
 class OfferListItem extends StatelessWidget {
   const OfferListItem({

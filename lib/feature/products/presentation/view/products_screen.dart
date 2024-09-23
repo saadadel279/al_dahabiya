@@ -1,8 +1,8 @@
 import 'package:al_dahabiya/core/app_router.dart';
 import 'package:al_dahabiya/core/widgets/app_page_title.dart';
-import 'package:al_dahabiya/feature/home/presentation/widgets/search_tap.dart';
+import 'package:al_dahabiya/feature/home/presentation/view/widgets/search_tap.dart';
+import 'package:al_dahabiya/feature/products/presentation/view/widgets/product_details_item.dart';
 import 'package:al_dahabiya/feature/products/presentation/view_model/cubit/brand_products_cubit.dart';
-import 'package:al_dahabiya/feature/products/presentation/widgets/product_details_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

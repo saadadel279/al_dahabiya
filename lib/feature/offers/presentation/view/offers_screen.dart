@@ -1,6 +1,6 @@
 import 'package:al_dahabiya/core/widgets/app_page_title.dart';
-import 'package:al_dahabiya/feature/home/presentation/widgets/offer_list_item.dart';
-import 'package:al_dahabiya/feature/home/presentation/widgets/search_tap.dart';
+import 'package:al_dahabiya/feature/home/presentation/view/widgets/offer_list_item.dart';
+import 'package:al_dahabiya/feature/home/presentation/view/widgets/search_tap.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 

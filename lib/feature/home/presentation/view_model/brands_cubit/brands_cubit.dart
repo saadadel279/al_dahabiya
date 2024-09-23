@@ -1,5 +1,5 @@
 import 'package:al_dahabiya/feature/home/data/models/brands_model.dart';
-import 'package:al_dahabiya/feature/home/data/repo/categories_repo.dart';
+import 'package:al_dahabiya/feature/home/data/repo/brand_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 

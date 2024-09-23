@@ -1,6 +1,6 @@
 import 'package:al_dahabiya/core/app_router.dart';
+import 'package:al_dahabiya/core/models/product_model.dart';
 import 'package:al_dahabiya/feature/product_details/presentation/view/widgets/product_titile_section.dart';
-import 'package:al_dahabiya/feature/products/data/models/brand_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -13,7 +13,7 @@ class ProductDetailsScreen extends StatelessWidget {
     this.productOfBrand,
   });
 
-  final ProductOfBrand? productOfBrand;
+  final Product? productOfBrand;
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;

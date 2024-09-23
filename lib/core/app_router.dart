@@ -1,4 +1,5 @@
 import 'package:al_dahabiya/core/api/dio_consumer.dart';
+import 'package:al_dahabiya/core/models/product_model.dart';
 import 'package:al_dahabiya/feature/Auth/featuers/login/data/repo/login_repo.dart';
 import 'package:al_dahabiya/feature/Auth/featuers/login/presentation/view/login_screen.dart';
 import 'package:al_dahabiya/feature/Auth/featuers/login/presentation/view_mode/cubit/login_cubit.dart';
@@ -10,7 +11,6 @@ import 'package:al_dahabiya/feature/home/presentation/view/home_screen.dart';
 import 'package:al_dahabiya/feature/initial/navebar.dart';
 import 'package:al_dahabiya/feature/offers/presentation/view/offers_screen.dart';
 import 'package:al_dahabiya/feature/product_details/presentation/view/product_details_screen.dart';
-import 'package:al_dahabiya/feature/products/data/models/brand_product_model.dart';
 import 'package:al_dahabiya/feature/products/data/repo/brand_product_repo.dart';
 import 'package:al_dahabiya/feature/products/presentation/view/products_screen.dart';
 import 'package:al_dahabiya/feature/products/presentation/view_model/cubit/brand_products_cubit.dart';
@@ -66,7 +66,7 @@ abstract class AppRouters {
       GoRoute(
           path: kProductDetailsRoute,
           builder: (context, state) {
-            final product = state.extra! as ProductOfBrand;
+            final product = state.extra! as Product;
             return ProductDetailsScreen(
               productOfBrand: product,
             );

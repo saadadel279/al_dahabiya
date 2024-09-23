@@ -1,4 +1,4 @@
-import 'package:al_dahabiya/feature/products/data/models/brand_product_model.dart';
+import 'package:al_dahabiya/core/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -7,7 +7,7 @@ class PriceContainer extends StatelessWidget {
     super.key,
     this.productOfBrand,
   });
-  final ProductOfBrand? productOfBrand;
+  final Product? productOfBrand;
   @override
   Widget build(BuildContext context) {
     return Container(
