@@ -1,7 +1,7 @@
 import 'package:al_dahabiya/core/api/api_services.dart';
 import 'package:al_dahabiya/core/api/end_point.dart';
 import 'package:al_dahabiya/core/error/exceptions.dart';
-import 'package:al_dahabiya/feature/home/data/models/offers_model.dart';
+import 'package:al_dahabiya/core/models/offers_model.dart';
 import 'package:dartz/dartz.dart';
 
 class OfferRepo {

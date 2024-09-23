@@ -1,4 +1,4 @@
-import 'package:al_dahabiya/feature/home/data/models/offers_model.dart';
+import 'package:al_dahabiya/core/models/offers_model.dart';
 import 'package:al_dahabiya/feature/home/data/repo/offer_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
