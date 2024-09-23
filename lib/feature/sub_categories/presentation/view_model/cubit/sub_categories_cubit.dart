@@ -1,5 +1,5 @@
 import 'package:al_dahabiya/feature/sub_categories/data/model/sub_categories_model.dart';
-import 'package:al_dahabiya/feature/sub_categories/data/repo/sub_categories_model.dart';
+import 'package:al_dahabiya/feature/sub_categories/data/repo/sub_categories_repo.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 

@@ -16,7 +16,9 @@ import 'package:al_dahabiya/feature/products/presentation/view/products_screen.d
 import 'package:al_dahabiya/feature/products/presentation/view_model/cubit/brand_products_cubit.dart';
 import 'package:al_dahabiya/feature/splash/presentation/view/splash_screen.dart';
 import 'package:al_dahabiya/feature/splash/presentation/view_model/cubit/splash_cubit.dart';
+import 'package:al_dahabiya/feature/sub_categories/data/repo/sub_categories_repo.dart';
 import 'package:al_dahabiya/feature/sub_categories/presentation/view/sub_categories_screen.dart';
+import 'package:al_dahabiya/feature/sub_categories/presentation/view_model/cubit/sub_categories_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -51,8 +53,13 @@ abstract class AppRouters {
         path: kSubCategoriesScreenRoute,
         builder: (context, state) {
           final id = state.extra! as int;
-          return SubCategoriesScreen(
-            id: id,
+          return BlocProvider(
+            create: (context) => SubCategoriesCubit(
+                SubCategoriesRepo(apiServices: DioConsumer(dio: Dio())))
+              ..getSubCategories(id),
+            child: SubCategoriesScreen(
+              id: id,
+            ),
           );
         },
       ),

@@ -1,6 +1,9 @@
+import 'package:al_dahabiya/core/models/category_model.dart';
 import 'package:al_dahabiya/core/widgets/app_page_title.dart';
+import 'package:al_dahabiya/feature/sub_categories/presentation/view_model/cubit/sub_categories_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SubCategoriesScreen extends StatelessWidget {
@@ -22,11 +25,25 @@ class SubCategoriesScreen extends StatelessWidget {
               ),
               SizedBox(height: 15.h),
               Expanded(
-                child: ListView.builder(
-                    itemCount: 2,
-                    itemBuilder: (context, index) {
-                      return const SubCategoriesItem();
-                    }),
+                child: BlocBuilder<SubCategoriesCubit, SubCategoriesState>(
+                  builder: (context, state) {
+                    if (state is SubCategoriesSuccess) {
+                      return ListView.builder(
+                          itemCount:
+                              state.subCategoriesModel!.data.categories.length,
+                          itemBuilder: (context, index) {
+                            return SubCategoriesItem(
+                              subCategories: state
+                                  .subCategoriesModel!.data.categories[index],
+                            );
+                          });
+                    } else if (state is SubCategoriesFailure) {
+                      return Center(child: Text(state.errorMessage));
+                    } else {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  },
+                ),
               ),
             ],
           ),
@@ -39,8 +56,9 @@ class SubCategoriesScreen extends StatelessWidget {
 class SubCategoriesItem extends StatelessWidget {
   const SubCategoriesItem({
     super.key,
+    required this.subCategories,
   });
-
+  final Category subCategories;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -50,15 +68,14 @@ class SubCategoriesItem extends StatelessWidget {
               const Center(child: CircularProgressIndicator()),
           errorWidget: (context, url, error) =>
               const Center(child: Icon(Icons.error)),
-          imageUrl:
-              'https://tse1.mm.bing.net/th?id=OIP.JM6dTY_heMgc39tj43-BxQHaHa&pid=Api&P=0&h=220',
+          imageUrl: 'http://walker-stores.com/images/${subCategories.image}',
           width: double.infinity,
           fit: BoxFit.fill,
           height: 200.h,
         ),
         SizedBox(height: 15.h),
         Text(
-          'منتج',
+          subCategories.name!,
           style: TextStyle(fontSize: 25.sp),
           textAlign: TextAlign.center,
         ),

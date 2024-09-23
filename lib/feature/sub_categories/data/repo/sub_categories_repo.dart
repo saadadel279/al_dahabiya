@@ -12,7 +12,8 @@ class SubCategoriesRepo {
   Future<Either<String, SubCategoriesModel?>> getSubCategories(
       int categoryId) async {
     try {
-      var response = await apiServices.get(EndPoint.getSubCategories);
+      var response =
+          await apiServices.get('${EndPoint.getSubCategories}/$categoryId');
       subCategoriesModel = SubCategoriesModel.fromJson(response);
       return right(subCategoriesModel!);
     } on ServerException catch (e) {
