@@ -6,6 +6,7 @@ class EndPoint {
   static const String getLatestOffers = 'latest_offers';
   static const String getBrands = 'brands';
   static const String getBrandsProduct = 'brands/products';
+  static const String getSubCategories = 'categories/sub';
 }
 
 class ApiKey {
