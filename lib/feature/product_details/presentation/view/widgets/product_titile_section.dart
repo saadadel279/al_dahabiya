@@ -45,17 +45,22 @@ class ProductTitelSection extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(width: 20.w),
-            CachedNetworkImage(
-              imageUrl:
-                  'https://walker-stores.com/api/${productOfBrand?.image}',
-              placeholder: (context, url) =>
-                  const Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) => Image.asset(
-                'assets/images/product.jpeg',
-                height: 130.h,
-                width: 150.w,
-                fit: BoxFit.cover,
+            SizedBox(width: 40.w),
+            SizedBox(
+              height: 135.h,
+              width: 135.w,
+              child: CachedNetworkImage(
+                fit: BoxFit.fill,
+                imageUrl:
+                    'https://walker-stores.com/images/${productOfBrand?.image}',
+                placeholder: (context, url) =>
+                    const Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) => Image.asset(
+                  'assets/images/product.jpeg',
+                  height: 130.h,
+                  width: 150.w,
+                  fit: BoxFit.cover,
+                ),
               ),
             )
           ]),

@@ -14,7 +14,7 @@ class ItemImage extends StatelessWidget {
       borderRadius: const BorderRadius.only(
           topRight: Radius.circular(10), bottomRight: Radius.circular(10)),
       child: CachedNetworkImage(
-        imageUrl: offer!.image!,
+        imageUrl: 'http://walker-stores.com/images/${offer!.image!}',
         placeholder: (context, url) =>
             const Center(child: CircularProgressIndicator()),
         errorWidget: (context, url, error) =>

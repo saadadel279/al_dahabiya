@@ -17,12 +17,18 @@ class ProductDetailsItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CachedNetworkImage(
-              imageUrl: 'https://walker-stores.com/api/${productOfBrand.image}',
-              placeholder: (context, url) =>
-                  const Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) =>
-                  const Center(child: Icon(Icons.error)),
+            SizedBox(
+              height: 100.h,
+              child: CachedNetworkImage(
+                height: 100.h,
+                fit: BoxFit.fitWidth,
+                imageUrl:
+                    'https://walker-stores.com/images/${productOfBrand.image}',
+                placeholder: (context, url) =>
+                    const Center(child: CircularProgressIndicator()),
+                errorWidget: (context, url, error) =>
+                    const Center(child: Icon(Icons.error)),
+              ),
             ),
             SizedBox(height: 5.h),
             // Product Name
