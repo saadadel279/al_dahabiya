@@ -1,3 +1,4 @@
+import 'package:al_dahabiya/feature/categories/presentation/view/categories_screen.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,6 +18,7 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
   final List<Widget> items = [
     const HomeScreen(),
     const OffersScreen(),
+    const CategoriesScreen(),
   ];
 
   @override
@@ -47,12 +49,12 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
             ),
             label: 'العروض',
           ),
-          // BottomNavigationBarItem(
-          //   icon: Icon(
-          //     Icons.grid_view_outlined,
-          //   ),
-          //   label: 'الاصناف',
-          // ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.grid_view_outlined,
+            ),
+            label: 'الاصناف',
+          ),
         ],
       ),
       body: items[currentIndex],
