@@ -27,7 +27,9 @@ class ProductDetailsSection extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontSize: 16.sp),
               ),
-              const CounterWidget()
+              const CounterWidget(
+                quantity: 0,
+              )
             ],
           )
         : Column(

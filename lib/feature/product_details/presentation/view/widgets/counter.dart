@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../view_model/cubit/counter_cubit.dart'; // Your cubit file path
 
 class CounterWidget extends StatelessWidget {
-  const CounterWidget({super.key});
-
+  const CounterWidget({super.key, required this.quantity});
+  final int quantity;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -16,7 +16,9 @@ class CounterWidget extends StatelessWidget {
 }
 
 class CounterView extends StatelessWidget {
-  const CounterView({super.key});
+  const CounterView({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,20 +38,17 @@ class CounterView extends StatelessWidget {
                 child: IconButton(
                   onPressed: counterCubit.decrement,
                   icon: const Icon(Icons.remove),
-                  iconSize: 36,
+                  iconSize: 30,
                 ),
               ),
-
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Text(
                   '$state',
                   style: const TextStyle(
                       fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ),
-
-              // Increment Button
               Container(
                 decoration: BoxDecoration(
                   color: const Color(0xFFB0EAFD),
@@ -58,7 +57,7 @@ class CounterView extends StatelessWidget {
                 child: IconButton(
                   onPressed: counterCubit.increment,
                   icon: const Icon(Icons.add),
-                  iconSize: 36,
+                  iconSize: 30,
                 ),
               ),
             ],

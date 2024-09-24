@@ -1,10 +1,11 @@
+import 'package:al_dahabiya/core/database/sql_db.dart';
 import 'package:al_dahabiya/core/widgets/app_page_title.dart';
+import 'package:al_dahabiya/feature/cart/data/repo/cart_repo.dart';
+import 'package:al_dahabiya/feature/cart/presentation/view_mode/cubit/cart_cubit.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
-import '../../data/models/cart_item_model.dart';
-import '../view_mode/cubit/cart_cubit.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({super.key});
@@ -12,7 +13,7 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (_) => CartCubit()..loadInitialItems(),
+      create: (context) => CartCubit(CartRepo(sqlDB: SqlDB()))..getCartItem(),
       child: Scaffold(
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0.w),
@@ -26,163 +27,162 @@ class CartScreen extends StatelessWidget {
                 ),
                 SizedBox(height: 15.h),
                 Expanded(
-                  child: BlocBuilder<CartCubit, List<CartItemModel>>(
-                    builder: (context, cartItems) {
-                      return ListView.builder(
-                        itemCount: cartItems.length,
-                        itemBuilder: (context, index) {
-                          final item = cartItems[index];
-                          return Directionality(
-                            textDirection: TextDirection.rtl,
-                            child: Padding(
-                              padding: EdgeInsets.only(bottom: 15.h),
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  color: Color(0xFFF5E3E7),
-                                ),
-                                margin: EdgeInsets.symmetric(
-                                  vertical: 4.h,
-                                  horizontal: 5.w,
-                                ),
-                                child: Card(
-                                  color: Colors.white,
+                  child: BlocBuilder<CartCubit, CartState>(
+                    builder: (context, state) {
+                      if (state is CartSuccess) {
+                        return ListView.builder(
+                          itemCount: state.cartItems.length,
+                          itemBuilder: (context, index) {
+                            return Directionality(
+                              textDirection: TextDirection.rtl,
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: 15.h),
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    color: Color(0xFFF5E3E7),
+                                  ),
                                   margin: EdgeInsets.symmetric(
-                                      horizontal: 16.w, vertical: 8.h),
-                                  child: Padding(
-                                    padding: EdgeInsets.all(8.0.sp),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Image.asset(
-                                              item.imageUrl,
-                                              width: 50.w,
-                                              height: 50.h,
-                                            ),
-                                            SizedBox(width: 10.w),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  item.name,
-                                                  style: TextStyle(
-                                                      fontSize: 18.sp),
-                                                ),
-                                                SizedBox(height: 4.h),
-                                                Text(
-                                                  "${item.price} ج.م",
-                                                  style: const TextStyle(
-                                                    fontSize: 16,
-                                                    color: Colors.red,
+                                    vertical: 4.h,
+                                    horizontal: 5.w,
+                                  ),
+                                  child: Card(
+                                    color: Colors.white,
+                                    margin: EdgeInsets.symmetric(
+                                        horizontal: 16.w, vertical: 8.h),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(8.0.sp),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              CachedNetworkImage(
+                                                imageUrl:
+                                                    'http://walker-stores.com/images/${state.cartItems[index].imageUrl}',
+                                                width: 50.w,
+                                                height: 50.h,
+                                              ),
+                                              SizedBox(width: 10.w),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    state.cartItems[index].name,
+                                                    style: TextStyle(
+                                                        fontSize: 18.sp),
                                                   ),
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: const Color(0xFFB0EAFD),
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
+                                                  SizedBox(height: 4.h),
+                                                  Text(
+                                                    "${state.cartItems[index].price} ج.م",
+                                                    style: const TextStyle(
+                                                      fontSize: 16,
+                                                      color: Colors.red,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                              child: IconButton(
-                                                iconSize: 26.sp,
-                                                icon: const Icon(Icons.remove),
-                                                onPressed: () => context
-                                                    .read<CartCubit>()
-                                                    .decrementQuantity(index),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'الكمية:',
+                                                style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
-                                            ),
-                                            SizedBox(width: 16.w),
-                                            Text(
-                                              '${item.quantity}',
-                                              style:
-                                                  const TextStyle(fontSize: 18),
-                                            ),
-                                            SizedBox(width: 16.w),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                color: const Color(0xFFB0EAFD),
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                              ),
-                                              child: IconButton(
-                                                iconSize: 26.sp,
-                                                icon: const Icon(Icons.add),
-                                                onPressed: () => context
-                                                    .read<CartCubit>()
-                                                    .incrementQuantity(index),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                              Text(
+                                                ' ${state.cartItems[index].quantity.toString()}',
+                                                style: const TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )
+                                            ],
+                                          ),
+
+                                          // CounterWidget(
+                                          //   quantity:
+                                          //       state.cartItems[index].quantity,
+                                          // ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      );
+                            );
+                          },
+                        );
+                      } else if (state is CartLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (state is CartFailure) {
+                        return Center(
+                          child: Text(state.errorMessage),
+                        );
+                      } else {
+                        return Center(
+                          child: Text(state.toString()),
+                        );
+                      }
                     },
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.h),
-                  child: BlocBuilder<CartCubit, List<CartItemModel>>(
-                    builder: (context, cartItems) {
-                      final totalPrice =
-                          context.read<CartCubit>().getTotalPrice();
-                      return Directionality(
-                        textDirection: TextDirection.rtl,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              children: [
-                                Text(
-                                  'المجموع: ',
-                                  style: TextStyle(
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  ' ${totalPrice.toStringAsFixed(2)} ج.م',
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontSize: 20.sp,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 150.w,
-                              height: 45.h,
-                              child: ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFFB13E55),
-                                ),
-                                child: const Text(
-                                  'شراء',
-                                  style: TextStyle(
-                                      fontSize: 22, color: Colors.white),
+                    padding: EdgeInsets.symmetric(vertical: 20.h),
+                    child: Directionality(
+                      textDirection: TextDirection.rtl,
+                      child: BlocProvider(
+                        create: (context) =>
+                            CartCubit(CartRepo(sqlDB: SqlDB())),
+                        child: Builder(builder: (context) {
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    'المجموع: ',
+                                    style: TextStyle(
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    ' السعر ج.م',
+                                    style: TextStyle(
+                                        color: Colors.red,
+                                        fontSize: 20.sp,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 150.w,
+                                height: 45.h,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    context.read<CartCubit>().clearTable();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: const Color(0xFFB13E55),
+                                  ),
+                                  child: const Text(
+                                    'شراء',
+                                    style: TextStyle(
+                                        fontSize: 22, color: Colors.white),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      );
-                    },
-                  ),
-                ),
+                            ],
+                          );
+                        }),
+                      ),
+                    )),
               ],
             ),
           ),

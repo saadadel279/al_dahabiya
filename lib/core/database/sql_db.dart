@@ -21,12 +21,15 @@ class SqlDB {
   }
 
   _onCreate(Database database, int version) async {
-    await database.execute('''CREATE TABLE "cart"(
-        'id' INTEGER PRIMARY KEY NOT NULL AUTOINCREMENT, 
-        'name' TEXT,
-        'price' REAL, 
-        'imageUrl' TEXT, 
-        'quantity' INTEGER)''');
+    await database.execute('''CREATE TABLE "cart" (
+  "id" INTEGER PRIMARY KEY AUTOINCREMENT, 
+  "product_id" INTEGER,
+  "name" TEXT,
+  "price" REAL, 
+  "imageUrl" TEXT, 
+  "quantity" INTEGER
+)
+''');
     print("database created");
   }
 
@@ -53,6 +56,12 @@ class SqlDB {
   deleteData(String sql) async {
     Database? database = await db;
     int response = await database.rawDelete(sql);
+    return response;
+  }
+
+  Future<int> clearTable() async {
+    Database? database = await db;
+    int response = await database.delete('cart');
     return response;
   }
 }

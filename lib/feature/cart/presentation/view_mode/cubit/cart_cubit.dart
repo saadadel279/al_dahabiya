@@ -14,7 +14,7 @@ class CartCubit extends Cubit<CartState> {
     final response = await cartRepo.getCartItem();
     response.fold(
       (error) => emit(CartFailure(errorMessage: error)),
-      (cartItem) => emit(CartSuccess(cartItems: cartItem)),
+      (cartItems) => emit(CartSuccess(cartItems: cartItems)),
     );
   }
 
@@ -23,7 +23,7 @@ class CartCubit extends Cubit<CartState> {
     final response = await cartRepo.deleteCartItem(id);
     response.fold(
       (error) => emit(CartFailure(errorMessage: error)),
-      (cartItem) => emit(CartSuccess(cartItems: cartItem)),
+      (cartItem) => emit(AddOrDeleatToCartSuccess(id: cartItem)),
     );
   }
 
@@ -32,7 +32,16 @@ class CartCubit extends Cubit<CartState> {
     final response = await cartRepo.insertCartItem(productId, sql);
     response.fold(
       (error) => emit(CartFailure(errorMessage: error)),
-      (cartItem) => emit(CartSuccess(cartItems: cartItem)),
+      (cartItem) => emit(AddOrDeleatToCartSuccess(id: cartItem)),
+    );
+  }
+
+  Future<void> clearTable() async {
+    emit(CartLoading());
+    final response = await cartRepo.clearTable();
+    response.fold(
+      (error) => emit(CartFailure(errorMessage: error)),
+      (cartItem) => emit(ClearTableSuccess(statee: cartItem)),
     );
   }
 }

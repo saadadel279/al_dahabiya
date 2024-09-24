@@ -7,9 +7,14 @@ final class CartInitial extends CartState {}
 
 final class CartLoading extends CartState {}
 
-final class CartSuccess extends CartState {
-  final CartItemModel? cartItems;
+final class AddOrDeleatToCartSuccess extends CartState {
+  final int? id;
 
+  AddOrDeleatToCartSuccess({required this.id});
+}
+
+class CartSuccess extends CartState {
+  final List<CartItemModel> cartItems;
   CartSuccess({required this.cartItems});
 }
 
@@ -17,4 +22,10 @@ final class CartFailure extends CartState {
   final String errorMessage;
 
   CartFailure({required this.errorMessage});
+}
+
+final class ClearTableSuccess extends CartState {
+  final int? statee;
+
+  ClearTableSuccess({required this.statee});
 }
