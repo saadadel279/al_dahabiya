@@ -1,70 +1,38 @@
+import 'package:al_dahabiya/feature/cart/data/models/cart_item_model.dart';
+import 'package:al_dahabiya/feature/cart/data/repo/cart_repo.dart';
 import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
 
-import '../../../data/models/cart_item_model.dart';
+part 'cart_state.dart';
 
-class CartCubit extends Cubit<List<CartItemModel>> {
-  CartCubit() : super([]);
+class CartCubit extends Cubit<CartState> {
+  CartCubit(this.cartRepo) : super(CartInitial());
+  final CartRepo cartRepo;
 
-  void loadInitialItems() {
-    emit([
-      CartItemModel(
-          name: "مكـنسـة",
-          imageUrl: "assets/images/product.jpeg",
-          price: 25,
-          quantity: 2),
-      CartItemModel(
-          name: "فـوطـة",
-          imageUrl: "assets/images/product.jpeg",
-          price: 20,
-          quantity: 1),
-      CartItemModel(
-          name: "مـنـاديل",
-          imageUrl: "assets/images/product.jpeg",
-          price: 15,
-          quantity: 2),
-      CartItemModel(
-          name: "مـطـهر",
-          imageUrl: "assets/images/product.jpeg",
-          price: 10,
-          quantity: 2),
-    ]);
+  Future<void> getCartItem() async {
+    emit(CartLoading());
+    final response = await cartRepo.getCartItem();
+    response.fold(
+      (error) => emit(CartFailure(errorMessage: error)),
+      (cartItem) => emit(CartSuccess(cartItems: cartItem)),
+    );
   }
 
-  void incrementQuantity(int index) {
-    List<CartItemModel> updatedCart = [];
-    for (var item in state) {
-      updatedCart.add(CartItemModel(
-        name: item.name,
-        imageUrl: item.imageUrl,
-        price: item.price,
-        quantity: item.quantity,
-      ));
-    }
-    updatedCart[index].quantity++;
-    emit(updatedCart);
+  Future<void> deleteCartItem(int id) async {
+    emit(CartLoading());
+    final response = await cartRepo.deleteCartItem(id);
+    response.fold(
+      (error) => emit(CartFailure(errorMessage: error)),
+      (cartItem) => emit(CartSuccess(cartItems: cartItem)),
+    );
   }
 
-  void decrementQuantity(int index) {
-    List<CartItemModel> updatedCart = [];
-    for (var item in state) {
-      updatedCart.add(CartItemModel(
-        name: item.name,
-        imageUrl: item.imageUrl,
-        price: item.price,
-        quantity: item.quantity,
-      ));
-    }
-    if (updatedCart[index].quantity > 1) {
-      updatedCart[index].quantity--;
-    }
-    emit(updatedCart);
-  }
-
-  double getTotalPrice() {
-    double total = 0;
-    for (var item in state) {
-      total += item.price * item.quantity;
-    }
-    return total;
+  Future<void> insertCartItem(int productId, String sql) async {
+    emit(CartLoading());
+    final response = await cartRepo.insertCartItem(productId, sql);
+    response.fold(
+      (error) => emit(CartFailure(errorMessage: error)),
+      (cartItem) => emit(CartSuccess(cartItems: cartItem)),
+    );
   }
 }
