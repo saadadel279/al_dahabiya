@@ -103,11 +103,6 @@ class CartScreen extends StatelessWidget {
                                               )
                                             ],
                                           ),
-
-                                          // CounterWidget(
-                                          //   quantity:
-                                          //       state.cartItems[index].quantity,
-                                          // ),
                                         ],
                                       ),
                                     ),
@@ -124,6 +119,10 @@ class CartScreen extends StatelessWidget {
                       } else if (state is CartFailure) {
                         return Center(
                           child: Text(state.errorMessage),
+                        );
+                      } else if (state is ClearTableSuccess) {
+                        return const Center(
+                          child: Text('Cart Clean'),
                         );
                       } else {
                         return Center(
