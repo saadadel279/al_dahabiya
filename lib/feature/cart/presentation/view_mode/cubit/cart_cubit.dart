@@ -44,4 +44,13 @@ class CartCubit extends Cubit<CartState> {
       (cartItem) => emit(ClearTableSuccess(statee: cartItem)),
     );
   }
+
+  Future<void> calculateTotalPrice() async {
+    emit(CartLoading());
+    final response = await cartRepo.calculateTotalPrice();
+    response.fold(
+      (error) => emit(CartFailure(errorMessage: error)),
+      (totalPrice) => emit(CalculateTotalPriceSuccess(totalPrice: totalPrice)),
+    );
+  }
 }

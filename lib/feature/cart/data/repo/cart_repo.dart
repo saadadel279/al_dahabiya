@@ -60,4 +60,27 @@ class CartRepo {
       return left(e.toString());
     }
   }
+
+  Future<Either<String, double>> calculateTotalPrice() async {
+    try {
+      var response =
+          await sqlDB.selectData('''SELECT price, quantity FROM cart''');
+
+      if (response.isNotEmpty) {
+        double totalPrice = 0.0;
+
+        for (var item in response) {
+          double price = item['price'] as double;
+          int quantity = item['quantity'] as int;
+          totalPrice += price * quantity;
+        }
+
+        return right(totalPrice);
+      } else {
+        return left("Cart is empty");
+      }
+    } on Exception catch (e) {
+      return left(e.toString());
+    }
+  }
 }

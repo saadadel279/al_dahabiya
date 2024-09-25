@@ -29,3 +29,9 @@ final class ClearTableSuccess extends CartState {
 
   ClearTableSuccess({required this.statee});
 }
+
+final class CalculateTotalPriceSuccess extends CartState {
+  final double? totalPrice;
+
+  CalculateTotalPriceSuccess({required this.totalPrice});
+}
