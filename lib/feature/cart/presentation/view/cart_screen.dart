@@ -117,13 +117,9 @@ class CartScreen extends StatelessWidget {
                           child: CircularProgressIndicator(),
                         );
                       } else if (state is CartFailure) {
-                        return Center(
-                          child: Text(state.errorMessage),
-                        );
+                        return Image.asset('assets/images/empety_cart.png');
                       } else if (state is ClearTableSuccess) {
-                        return const Center(
-                          child: Text('Cart Clean'),
-                        );
+                        return Image.asset('assets/images/empety_cart.png');
                       } else {
                         return Center(
                           child: Text(state.toString()),
@@ -136,10 +132,8 @@ class CartScreen extends StatelessWidget {
                     padding: EdgeInsets.symmetric(vertical: 20.h),
                     child: Directionality(
                       textDirection: TextDirection.rtl,
-                      child: BlocProvider(
-                        create: (context) =>
-                            CartCubit(CartRepo(sqlDB: SqlDB())),
-                        child: Builder(builder: (context) {
+                      child: Builder(
+                        builder: (context) {
                           return Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -179,7 +173,7 @@ class CartScreen extends StatelessWidget {
                               ),
                             ],
                           );
-                        }),
+                        },
                       ),
                     )),
               ],
