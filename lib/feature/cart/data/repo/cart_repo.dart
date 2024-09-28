@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:al_dahabiya/core/database/sql_db.dart';
 import 'package:dartz/dartz.dart';
 
@@ -65,7 +67,7 @@ class CartRepo {
     try {
       var response =
           await sqlDB.selectData('''SELECT price, quantity FROM cart''');
-
+      log(response.toString());
       if (response.isNotEmpty) {
         double totalPrice = 0.0;
 
@@ -74,6 +76,7 @@ class CartRepo {
           int quantity = item['quantity'] as int;
           totalPrice += price * quantity;
         }
+        log(totalPrice.toString());
 
         return right(totalPrice);
       } else {

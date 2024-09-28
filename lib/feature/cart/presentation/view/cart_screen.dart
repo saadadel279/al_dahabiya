@@ -13,7 +13,9 @@ class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CartCubit(CartRepo(sqlDB: SqlDB()))..getCartItem(),
+      create: (context) => CartCubit(CartRepo(sqlDB: SqlDB()))
+        ..getCartItem()
+        ..calculateTotalPrice(),
       child: Scaffold(
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0.w),
@@ -120,6 +122,8 @@ class CartScreen extends StatelessWidget {
                         return Image.asset('assets/images/empety_cart.png');
                       } else if (state is ClearTableSuccess) {
                         return Image.asset('assets/images/empety_cart.png');
+                      } else if (state is CalculateTotalPriceSuccess) {
+                        return Text(state.totalPrice.toString());
                       } else {
                         return Center(
                           child: Text(state.toString()),
