@@ -12,21 +12,17 @@ class CartRepo {
       getCartItem() async {
     try {
       var response = await sqlDB.selectData('''SELECT * FROM cart''');
-
       if (response.isNotEmpty) {
         List<CartItemModel> cartItems = response.map<CartItemModel>((item) {
           return CartItemModel.fromJson(item);
         }).toList();
 
-        // حساب السعر الإجمالي
         double totalPrice = 0.0;
         for (var item in response) {
           double price = item['price'] as double;
           int quantity = item['quantity'] as int;
           totalPrice += price * quantity;
         }
-
-        // إرجاع العناصر والسعر الإجمالي كـ Tuple
         return right(Tuple2(cartItems, totalPrice));
       } else {
         return left("Cart is empty");
@@ -49,7 +45,6 @@ class CartRepo {
   Future<Either<String, int?>> insertCartItem(
       int productId, String sql, int increment) async {
     try {
-      // تحقق مما إذا كان العنصر موجودًا بالفعل في السلة
       var existingItem = await sqlDB
           .selectData('SELECT * FROM cart WHERE product_id = $productId');
 
