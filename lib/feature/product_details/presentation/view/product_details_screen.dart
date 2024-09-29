@@ -94,7 +94,8 @@ class ProductDetailsScreen extends StatelessWidget {
 
                                   context.read<CartCubit>().insertCartItem(
                                       productOfBrand!.id!,
-                                      '''INSERT INTO cart (product_id, name, price, imageUrl, quantity) VALUES (${productOfBrand!.id!}, '${productOfBrand!.name!}', ${productOfBrand!.price!}, '${productOfBrand!.image!}', $productQuantity)''');
+                                      '''INSERT INTO cart (product_id, name, price, imageUrl, quantity) VALUES (${productOfBrand!.id!}, '${productOfBrand!.name!}', ${productOfBrand!.price!}, '${productOfBrand!.image!}', $productQuantity)''',
+                                      productQuantity);
                                 },
                                 child: Container(
                                   height: 30.h,

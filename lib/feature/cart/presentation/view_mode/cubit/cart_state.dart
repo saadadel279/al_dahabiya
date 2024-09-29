@@ -15,7 +15,8 @@ final class AddOrDeleatToCartSuccess extends CartState {
 
 class CartSuccess extends CartState {
   final List<CartItemModel> cartItems;
-  CartSuccess({required this.cartItems});
+  final double? totalPrice;
+  CartSuccess({required this.totalPrice, required this.cartItems});
 }
 
 final class CartFailure extends CartState {
@@ -28,10 +29,4 @@ final class ClearTableSuccess extends CartState {
   final int? statee;
 
   ClearTableSuccess({required this.statee});
-}
-
-final class CalculateTotalPriceSuccess extends CartState {
-  final double? totalPrice;
-
-  CalculateTotalPriceSuccess({required this.totalPrice});
 }

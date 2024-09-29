@@ -14,7 +14,11 @@ class CartCubit extends Cubit<CartState> {
     final response = await cartRepo.getCartItem();
     response.fold(
       (error) => emit(CartFailure(errorMessage: error)),
-      (cartItems) => emit(CartSuccess(cartItems: cartItems)),
+      (result) {
+        final cartItems = result.value1;
+        final totalPrice = result.value2;
+        emit(CartSuccess(cartItems: cartItems, totalPrice: totalPrice));
+      },
     );
   }
 
@@ -27,9 +31,9 @@ class CartCubit extends Cubit<CartState> {
     );
   }
 
-  Future<void> insertCartItem(int productId, String sql) async {
+  Future<void> insertCartItem(int productId, String sql, int increment) async {
     emit(CartLoading());
-    final response = await cartRepo.insertCartItem(productId, sql);
+    final response = await cartRepo.insertCartItem(productId, sql, increment);
     response.fold(
       (error) => emit(CartFailure(errorMessage: error)),
       (cartItem) => emit(AddOrDeleatToCartSuccess(id: cartItem)),
@@ -42,15 +46,6 @@ class CartCubit extends Cubit<CartState> {
     response.fold(
       (error) => emit(CartFailure(errorMessage: error)),
       (cartItem) => emit(ClearTableSuccess(statee: cartItem)),
-    );
-  }
-
-  Future<void> calculateTotalPrice() async {
-    emit(CartLoading());
-    final response = await cartRepo.calculateTotalPrice();
-    response.fold(
-      (error) => emit(CartFailure(errorMessage: error)),
-      (totalPrice) => emit(CalculateTotalPriceSuccess(totalPrice: totalPrice)),
     );
   }
 }
