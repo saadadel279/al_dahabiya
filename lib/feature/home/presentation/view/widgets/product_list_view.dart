@@ -14,18 +14,13 @@ class CategoriesListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 150.h,
+      height: 100.h,
       child: BlocBuilder<BrandsCubit, BrandsState>(
         builder: (context, state) {
           if (state is BrandsSuccess) {
-            return GridView.builder(
+            return ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: state.categoriesModel!.data.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 20,
-              ),
               itemBuilder: (context, index) {
                 return InkWell(
                     onTap: () {

@@ -2,13 +2,16 @@ import 'package:al_dahabiya/core/api/dio_consumer.dart';
 import 'package:al_dahabiya/core/app_router.dart';
 import 'package:al_dahabiya/core/widgets/app_page_title.dart';
 import 'package:al_dahabiya/feature/home/data/repo/brand_repo.dart';
+import 'package:al_dahabiya/feature/home/data/repo/most_visited_repo.dart';
 import 'package:al_dahabiya/feature/home/data/repo/offer_repo.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/widgets/banner.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/widgets/category_title_row.dart';
+import 'package:al_dahabiya/feature/home/presentation/view/widgets/most_visited_listView.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/widgets/offers_listview.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/widgets/product_list_view.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/widgets/search_tap.dart';
 import 'package:al_dahabiya/feature/home/presentation/view_model/brands_cubit/brands_cubit.dart';
+import 'package:al_dahabiya/feature/home/presentation/view_model/most_visited_cubit/most_visited_cubit.dart';
 import 'package:al_dahabiya/feature/home/presentation/view_model/offers_cubit/offers_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -51,6 +54,16 @@ class HomeScreen extends StatelessWidget {
                         BrandsRepo(apiServices: DioConsumer(dio: Dio())))
                       ..getCategories(),
                     child: const CategoriesListView(),
+                  ),
+                  SizedBox(height: 15.h),
+                  const CategoryTitleRow(
+                    categoryName: 'الاكثر مشاهدة',
+                  ),
+                  BlocProvider(
+                    create: (context) => MostVisitedCubit(
+                        MostVisitedRepo(apiServices: DioConsumer(dio: Dio())))
+                      ..getMostVisited(),
+                    child: const MostVisitedListview(),
                   ),
                   SizedBox(height: 15.h),
                   InkWell(
