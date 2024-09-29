@@ -59,6 +59,7 @@ class HomeScreen extends StatelessWidget {
                   const CategoryTitleRow(
                     categoryName: 'الاكثر مشاهدة',
                   ),
+                  SizedBox(height: 15.h),
                   BlocProvider(
                     create: (context) => MostVisitedCubit(
                         MostVisitedRepo(apiServices: DioConsumer(dio: Dio())))
