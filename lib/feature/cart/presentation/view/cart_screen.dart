@@ -154,9 +154,7 @@ class CartScreen extends StatelessWidget {
                                       height: 45.h,
                                       child: ElevatedButton(
                                         onPressed: () {
-                                          context
-                                              .read<CartCubit>()
-                                              .clearTable();
+                                          // context.read<CartCubit>().clearTable();
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor:

@@ -10,6 +10,7 @@ class EndPoint {
   static const String getSubCategoriesProduct = 'categories/products';
   static const String getMostVisited = 'most_visited';
   static const String getSlider = 'slider';
+  static const String orderRequest = 'orderRequest';
 }
 
 class ApiKey {
