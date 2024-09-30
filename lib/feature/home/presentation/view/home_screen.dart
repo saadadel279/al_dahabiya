@@ -4,6 +4,7 @@ import 'package:al_dahabiya/core/widgets/app_page_title.dart';
 import 'package:al_dahabiya/feature/home/data/repo/brand_repo.dart';
 import 'package:al_dahabiya/feature/home/data/repo/most_visited_repo.dart';
 import 'package:al_dahabiya/feature/home/data/repo/offer_repo.dart';
+import 'package:al_dahabiya/feature/home/data/repo/slider_repo.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/widgets/banner.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/widgets/category_title_row.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/widgets/most_visited_listView.dart';
@@ -13,6 +14,7 @@ import 'package:al_dahabiya/feature/home/presentation/view/widgets/search_tap.da
 import 'package:al_dahabiya/feature/home/presentation/view_model/brands_cubit/brands_cubit.dart';
 import 'package:al_dahabiya/feature/home/presentation/view_model/most_visited_cubit/most_visited_cubit.dart';
 import 'package:al_dahabiya/feature/home/presentation/view_model/offers_cubit/offers_cubit.dart';
+import 'package:al_dahabiya/feature/home/presentation/view_model/slider_cubit/slider_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -41,7 +43,12 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: 15.h),
                   const SearshTap(),
                   SizedBox(height: 15.h),
-                  const BannerImage(),
+                  BlocProvider(
+                    create: (context) => SliderCubit(
+                        SliderRepo(apiServices: DioConsumer(dio: Dio())))
+                      ..getSlider(),
+                    child: const BannerImage(),
+                  ),
                   SizedBox(height: 15.h),
                   const CategoryTitleRow(
                     categoryName: 'البراندات',

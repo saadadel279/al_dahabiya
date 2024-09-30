@@ -8,6 +8,7 @@ class EndPoint {
   static const String getBrandsProduct = 'brands/products';
   static const String getSubCategories = 'categories/sub';
   static const String getMostVisited = 'most_visited';
+  static const String getSlider = 'slider';
 }
 
 class ApiKey {
