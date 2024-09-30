@@ -22,7 +22,8 @@ class MostVisitedListview extends StatelessWidget {
               itemBuilder: (context, index) {
                 return InkWell(
                     onTap: () {
-                      GoRouter.of(context).push(AppRouters.kProductScreenRoute);
+                      GoRouter.of(context).push(AppRouters.kProductDetailsRoute,
+                          extra: state.mostVisitedModel!.data[index]);
                     },
                     child: MostVisitedItem(
                       product: state.mostVisitedModel!.data[index],
