@@ -7,6 +7,7 @@ class EndPoint {
   static const String getBrands = 'brands';
   static const String getBrandsProduct = 'brands/products';
   static const String getSubCategories = 'categories/sub';
+  static const String getSubCategoriesProduct = 'categories/products';
   static const String getMostVisited = 'most_visited';
   static const String getSlider = 'slider';
 }

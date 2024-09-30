@@ -19,6 +19,7 @@ import 'package:al_dahabiya/feature/splash/presentation/view_model/cubit/splash_
 import 'package:al_dahabiya/feature/sub_categories/data/repo/sub_categories_repo.dart';
 import 'package:al_dahabiya/feature/sub_categories/presentation/view/sub_categories_screen.dart';
 import 'package:al_dahabiya/feature/sub_categories/presentation/view_model/cubit/sub_categories_cubit.dart';
+import 'package:al_dahabiya/feature/sub_categorise_product.dart/presentation/view/sub_cateo_prod_screen.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -35,6 +36,8 @@ abstract class AppRouters {
   static const String kProductScreenRoute = '/ProductsScreen';
   static const String kCartScreenRoute = '/CartScreen';
   static const String kSubCategoriesScreenRoute = '/kSubCategoriesScreenRoute';
+  static const String kSubCategoProdScreenRoute =
+      '/kSubCategoriesProductScreenRoute';
 
   static final GoRouter router = GoRouter(
     routes: [
@@ -49,6 +52,14 @@ abstract class AppRouters {
         path: kFirstRoute,
         builder: (context, state) => const CustomBottomNaveBar(),
       ),
+      GoRoute(
+          path: kSubCategoProdScreenRoute,
+          builder: (context, state) {
+            final id = state.extra! as int;
+            return SubCateoProdScreen(
+              id: id,
+            );
+          }),
       GoRoute(
         path: kSubCategoriesScreenRoute,
         builder: (context, state) {
