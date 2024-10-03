@@ -18,9 +18,9 @@ class ProductDetailsItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             SizedBox(
-              height: 100.h,
+              height: 89.h,
               child: CachedNetworkImage(
-                height: 100.h,
+                height: 95.h,
                 fit: BoxFit.fitWidth,
                 imageUrl:
                     'https://walker-stores.com/images/${productOfBrand.image}',

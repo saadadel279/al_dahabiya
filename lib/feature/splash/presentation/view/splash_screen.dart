@@ -12,7 +12,7 @@ class SplashScreen extends StatelessWidget {
     return BlocListener<SplashCubit, String>(
       listener: (context, state) {
         if (state == 'home') {
-          GoRouter.of(context).pushReplacement(AppRouters.kHomeRoute);
+          GoRouter.of(context).pushReplacement(AppRouters.kFirstRoute);
         } else if (state == 'login') {
           GoRouter.of(context).pushReplacement(AppRouters.kLoginRoute);
         }

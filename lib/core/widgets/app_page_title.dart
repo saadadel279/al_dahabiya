@@ -15,7 +15,7 @@ class PageTitleBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Directionality(
-                  textDirection: TextDirection.ltr, child: LocationBadge()),
+                  textDirection: TextDirection.ltr, child: logOutBadge()),
               Row(
                 children: [
                   Text(
@@ -38,7 +38,7 @@ class PageTitleBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Directionality(
-                  textDirection: TextDirection.ltr, child: LocationBadge()),
+                  textDirection: TextDirection.ltr, child: logOutBadge()),
             ],
           );
   }
