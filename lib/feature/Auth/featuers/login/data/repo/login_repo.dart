@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:al_dahabiya/core/api/api_services.dart';
 import 'package:al_dahabiya/core/api/end_point.dart';
 import 'package:al_dahabiya/core/database/cashe_helper.dart';
@@ -21,6 +23,11 @@ class LoginRepo {
         user = LoginModel.fromJson(response);
         getIt<CacheHelper>()
             .saveData(key: ApiKey.token, value: user!.data.token);
+        log(getIt<CacheHelper>()
+            .getData(
+              key: ApiKey.token,
+            )
+            .toString());
 
         return right(user);
       } else {

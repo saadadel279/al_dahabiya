@@ -9,15 +9,23 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SplashCubit, void>(
+    return BlocListener<SplashCubit, String>(
       listener: (context, state) {
-        GoRouter.of(context).pushReplacement(AppRouters.kLoginRoute);
+        if (state == 'home') {
+          GoRouter.of(context).pushReplacement(AppRouters.kHomeRoute);
+        } else if (state == 'login') {
+          GoRouter.of(context).pushReplacement(AppRouters.kLoginRoute);
+        }
       },
       child: Scaffold(
         backgroundColor: const Color(0xFFD04430),
         body: Center(
-          child: Image.asset('assets/images/Logo-removebg-preview.png',
-              fit: BoxFit.fill, height: 200, width: 300),
+          child: Image.asset(
+            'assets/images/Logo-removebg-preview.png',
+            fit: BoxFit.fill,
+            height: 200,
+            width: 300,
+          ),
         ),
       ),
     );
