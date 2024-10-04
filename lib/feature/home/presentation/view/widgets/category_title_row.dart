@@ -7,20 +7,23 @@ class CategoryTitleRow extends StatelessWidget {
     required this.categoryName,
     this.categoryAction,
     this.categoryActionNumber,
+    this.isBoold,
   });
 
   final String categoryName;
   final String? categoryAction;
   final String? categoryActionNumber;
+  final bool? isBoold;
 
   @override
   Widget build(BuildContext context) {
+    final double categoryNameSize = isBoold == true ? 20.sp : 14.sp;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           categoryName,
-          style: TextStyle(fontSize: 14.sp),
+          style: TextStyle(fontSize: categoryNameSize.sp),
         ),
         Row(
           children: [
