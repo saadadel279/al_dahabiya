@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FatoraDetailsRow extends StatelessWidget {
-  const FatoraDetailsRow({super.key, this.fatoraCount, this.fatoraTitle});
-  final int? fatoraCount;
+  const FatoraDetailsRow({
+    super.key,
+    this.fatoraCount,
+    this.fatoraTitle,
+  });
+  final double? fatoraCount;
   final String? fatoraTitle;
 
   @override

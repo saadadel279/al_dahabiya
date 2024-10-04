@@ -56,7 +56,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kOrderRequestScreenRoute,
-        builder: (context, state) => const OrderRequestScreen(),
+        builder: (context, state) => OrderRequestScreen(),
       ),
       GoRoute(
           path: kSubCategoProdScreenRoute,
