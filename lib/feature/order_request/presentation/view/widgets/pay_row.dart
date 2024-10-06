@@ -50,7 +50,7 @@ class PayRow extends StatelessWidget {
                     child: Builder(builder: (context) {
                       return ElevatedButton(
                         onPressed: () {
-                          const address = 40;
+                          const address = 31;
                           const coupon = "";
                           const paymentType = "الدفع عند الاستلام";
                           const deliveryTime = "sdfds";
@@ -80,6 +80,7 @@ class PayRow extends StatelessWidget {
                           context
                               .read<OrderRequestCubit>()
                               .orderRequest(orderRequestModel);
+                          context.read<CartCubit>().clearTable();
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFB13E55),
