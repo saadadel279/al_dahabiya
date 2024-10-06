@@ -11,15 +11,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../cart/data/models/cart_item_model.dart';
 import 'widgets/data_row.dart';
 import 'widgets/fatora_details_row.dart';
 import 'widgets/order_request_item.dart';
 import 'widgets/pay_row.dart';
 
 class OrderRequestScreen extends StatelessWidget {
-  OrderRequestScreen({super.key});
-  List<CartItemModel>? cartItem;
+  const OrderRequestScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,21 +29,17 @@ class OrderRequestScreen extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => OrderRequestCubit(
-              OrderRequestRepo(apiServices: DioConsumer(dio: Dio()))),
-        )
+            OrderRequestRepo(apiServices: DioConsumer(dio: Dio())),
+          ),
+        ),
       ],
       child: Scaffold(
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.0.w),
           child: Column(
             children: [
-              SafeArea(
-                child: SizedBox(height: 15.h),
-              ),
-              PageTitleBar(
-                isTitlePade: true,
-                pageTitle: 'عملية الشراء',
-              ),
+              SafeArea(child: SizedBox(height: 15.h)),
+              PageTitleBar(isTitlePade: true, pageTitle: 'عملية الشراء'),
               SizedBox(height: 15.h),
               const DataRowItem(
                 data: '3 شارع الملك خالد بن عبد الرحمن',
@@ -53,7 +47,7 @@ class OrderRequestScreen extends StatelessWidget {
               ),
               SizedBox(height: 15.h),
               const DataRowItem(
-                data: '13:00 today 22 july',
+                data: '13:00 today 22 July',
                 icon: Icon(Icons.schedule_outlined),
               ),
               SizedBox(height: 20.h),
@@ -64,67 +58,86 @@ class OrderRequestScreen extends StatelessWidget {
                   categoryName: 'الطلبيات',
                 ),
               ),
-              SizedBox(
-                height: 150.h,
-                child: Directionality(
-                  textDirection: TextDirection.rtl,
-                  child: BlocBuilder<CartCubit, CartState>(
-                    builder: (context, state) {
-                      if (state is CartSuccess) {
-                        cartItem = state.cartItems;
-                        return ListView.builder(
+              SizedBox(height: 15.h),
+              BlocBuilder<CartCubit, CartState>(
+                builder: (context, state) {
+                  if (state is CartLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is CartFailure) {
+                    return Center(
+                      child: Column(
+                        children: [
+                          Text(
+                              'Failed to load cart items: ${state.errorMessage}'),
+                          SizedBox(height: 10.h),
+                        ],
+                      ),
+                    );
+                  } else if (state is CartSuccess) {
+                    final cartItems = state.cartItems;
+                    if (cartItems.isEmpty) {
+                      return const Center(
+                        child: Text('No items in your cart',
+                            style: TextStyle(fontSize: 18)),
+                      );
+                    }
+
+                    return SizedBox(
+                      height: 150.h,
+                      child: Directionality(
+                        textDirection: TextDirection.rtl,
+                        child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: state.cartItems.length,
+                          itemCount: cartItems.length,
                           itemBuilder: (context, index) {
-                            return OrderRequestItem(
-                              cartItem: state.cartItems[index],
-                            );
+                            return OrderRequestItem(cartItem: cartItems[index]);
                           },
-                        );
-                      } else {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                    },
-                  ),
-                ),
+                        ),
+                      ),
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
               ),
               SizedBox(height: 15.h),
               BlocBuilder<CartCubit, CartState>(
                 builder: (context, state) {
-                  if (state is CartSuccess) {
+                  if (state is CartLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is CartFailure) {
+                    return Center(
+                      child: Text(
+                          'Failed to load total price: ${state.errorMessage}'),
+                    );
+                  } else if (state is CartSuccess) {
                     return FatoraDetailsRow(
                       fatoraCount: state.totalPrice,
                       fatoraTitle: 'سعر الطلبات',
                     );
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
                   }
+                  return const SizedBox.shrink();
                 },
               ),
               SizedBox(height: 15.h),
-              const FatoraDetailsRow(
-                fatoraCount: 50,
-                fatoraTitle: 'سعر الشحن',
-              ),
+              const FatoraDetailsRow(fatoraCount: 50, fatoraTitle: 'سعر الشحن'),
               SizedBox(height: 15.h),
               const PayRow(),
               SizedBox(height: 15.h),
               SizedBox(
                 width: 250.w,
                 height: 45.h,
-                child: ElevatedButton(
-                  onPressed: () {
-                    // context.read<CartCubit>().clearTable();
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFF6F3F4),
-                  ),
-                  child: const Text(
-                    'الغاء الطلبيات',
-                    style: TextStyle(
-                        fontSize: 22, color: Color.fromARGB(255, 0, 0, 0)),
-                  ),
-                ),
+                child: Builder(builder: (context) {
+                  return ElevatedButton(
+                    onPressed: () => context.read<CartCubit>().clearTable(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFFF6F3F4),
+                    ),
+                    child: const Text(
+                      'الغاء الطلبيات',
+                      style: TextStyle(fontSize: 22, color: Colors.black),
+                    ),
+                  );
+                }),
               ),
             ],
           ),

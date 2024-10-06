@@ -2,9 +2,6 @@ import 'package:al_dahabiya/feature/cart/presentation/view_mode/cubit/cart_cubit
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:go_router/go_router.dart';
-
-import '../../../../../core/app_router.dart';
 
 class PayRow extends StatelessWidget {
   const PayRow({
@@ -45,8 +42,6 @@ class PayRow extends StatelessWidget {
                     height: 45.h,
                     child: ElevatedButton(
                       onPressed: () {
-                        GoRouter.of(context)
-                            .push(AppRouters.kOrderRequestScreenRoute);
                         // context.read<CartCubit>().clearTable();
                       },
                       style: ElevatedButton.styleFrom(
