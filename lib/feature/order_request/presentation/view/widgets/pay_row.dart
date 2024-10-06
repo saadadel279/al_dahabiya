@@ -3,10 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../cart/data/models/cart_item_model.dart';
+import '../../../data/models/order_request_model.dart';
+import '../../view_model/cubit/order_request_cubit.dart';
+
 class PayRow extends StatelessWidget {
   const PayRow({
     super.key,
+    required this.cartItemsInOrder,
   });
+
+  final List<CartItemModel> cartItemsInOrder;
 
   @override
   Widget build(BuildContext context) {
@@ -40,18 +47,77 @@ class PayRow extends StatelessWidget {
                   SizedBox(
                     width: 150.w,
                     height: 45.h,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // context.read<CartCubit>().clearTable();
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFB13E55),
-                      ),
-                      child: const Text(
-                        'شراء',
-                        style: TextStyle(fontSize: 22, color: Colors.white),
-                      ),
-                    ),
+                    child: Builder(builder: (context) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          const address = 40;
+                          const coupon = "";
+                          const paymentType = "الدفع عند الاستلام";
+                          const deliveryTime = "sdfds";
+                          const comment = "";
+                          const points = 0;
+
+                          final List<ProductData> products =
+                              cartItemsInOrder.map((cartItem) {
+                            return ProductData(
+                              productId: cartItem.id,
+                              option1: -1,
+                              option2: -1,
+                              q: cartItem.quantity,
+                            );
+                          }).toList();
+
+                          final orderRequestModel = OrderRequestModel(
+                            address: address,
+                            coupon: coupon,
+                            paymentType: paymentType,
+                            deliveryTime: deliveryTime,
+                            comment: comment,
+                            points: points,
+                            data: products,
+                          );
+
+                          context
+                              .read<OrderRequestCubit>()
+                              .orderRequest(orderRequestModel);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFB13E55),
+                        ),
+                        child:
+                            BlocBuilder<OrderRequestCubit, OrderRequestState>(
+                          builder: (context, state) {
+                            if (state is OrderRequestSuccess) {
+                              return const Text(
+                                'تم الطلب بنجاح',
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              );
+                            } else if (state is OrderRequestFailure) {
+                              return const Text(
+                                textAlign: TextAlign.center,
+                                'من فضلك حاول مرة اخرى',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.white),
+                              );
+                            } else if (state is OrderRequestLoading) {
+                              return const Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white),
+                                ),
+                              );
+                            } else {
+                              return const Text(
+                                'شراء',
+                                style: TextStyle(
+                                    fontSize: 22, color: Colors.white),
+                              );
+                            }
+                          },
+                        ),
+                      );
+                    }),
                   ),
                 ],
               );

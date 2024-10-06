@@ -8,11 +8,11 @@ import '../../../../core/api/api_services.dart';
 
 class OrderRequestRepo {
   final ApiServices apiServices;
-  OrderRequestModel? orderRequestModel;
 
   OrderRequestRepo({required this.apiServices});
 
-  Future<Either<String, OrderResponseModel?>> orderRequest() async {
+  Future<Either<String, OrderResponseModel?>> orderRequest(
+      OrderRequestModel? orderRequestModel) async {
     try {
       var response = await apiServices.post(
         EndPoint.orderRequest,

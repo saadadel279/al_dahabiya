@@ -121,7 +121,16 @@ class OrderRequestScreen extends StatelessWidget {
               SizedBox(height: 15.h),
               const FatoraDetailsRow(fatoraCount: 50, fatoraTitle: 'سعر الشحن'),
               SizedBox(height: 15.h),
-              const PayRow(),
+              BlocBuilder<CartCubit, CartState>(
+                builder: (context, state) {
+                  if (state is CartSuccess) {
+                    return PayRow(
+                      cartItemsInOrder: state.cartItems,
+                    );
+                  }
+                  return const SizedBox.shrink();
+                },
+              ),
               SizedBox(height: 15.h),
               SizedBox(
                 width: 250.w,
