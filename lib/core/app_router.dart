@@ -7,9 +7,9 @@ import 'package:al_dahabiya/feature/Auth/featuers/signup/data/repo/Sign_up_repo.
 import 'package:al_dahabiya/feature/Auth/featuers/signup/presentation/view/sign_up_screen.dart';
 import 'package:al_dahabiya/feature/Auth/featuers/signup/presentation/view_model/cubit/sign_up_cubit.dart';
 import 'package:al_dahabiya/feature/cart/presentation/view/cart_screen.dart';
+import 'package:al_dahabiya/feature/favoreties/presentation/view/favoreties_screen.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/home_screen.dart';
 import 'package:al_dahabiya/feature/initial/navebar.dart';
-import 'package:al_dahabiya/feature/offers/presentation/view/offers_screen.dart';
 import 'package:al_dahabiya/feature/order_request/presentation/view/order_screen.dart';
 import 'package:al_dahabiya/feature/product_details/presentation/view/product_details_screen.dart';
 import 'package:al_dahabiya/feature/products/data/repo/brand_product_repo.dart';
@@ -56,7 +56,7 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kOrderRequestScreenRoute,
-        builder: (context, state) => OrderRequestScreen(),
+        builder: (context, state) => const OrderRequestScreen(),
       ),
       GoRoute(
           path: kSubCategoProdScreenRoute,
@@ -108,7 +108,7 @@ abstract class AppRouters {
           }),
       GoRoute(
         path: kOffersRoute,
-        builder: (context, state) => const OffersScreen(),
+        builder: (context, state) => const FavoritsScreen(),
       ),
       GoRoute(
         path: kLoginRoute,

@@ -4,7 +4,7 @@ import 'package:al_dahabiya/feature/home/presentation/view/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../offers/presentation/view/offers_screen.dart';
+import '../favoreties/presentation/view/favoreties_screen.dart';
 
 class CustomBottomNaveBar extends StatefulWidget {
   const CustomBottomNaveBar({super.key});
@@ -18,7 +18,7 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
 
   final List<Widget> items = [
     const HomeScreen(),
-    const OffersScreen(),
+    const FavoritsScreen(),
     const CategoriesScreen(),
     const CartScreen()
   ];
@@ -49,7 +49,7 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
             icon: Icon(
               Icons.favorite_border,
             ),
-            label: 'العروض',
+            label: 'المفضلة',
           ),
           BottomNavigationBarItem(
             icon: Icon(
