@@ -16,7 +16,7 @@ class SqlDB {
     String dataBasePath = await getDatabasesPath();
     String path = '$dataBasePath/cart.db';
     Database database = await openDatabase(path,
-        onCreate: _onCreate, version: 2, onUpgrade: _onUpgrade);
+        onCreate: _onCreate, version: 1, onUpgrade: _onUpgrade);
     return database;
   }
 
@@ -33,22 +33,7 @@ class SqlDB {
     print("database created");
   }
 
-  _onUpgrade(Database database, int oldVersion, int newVersion) async {
-    await database.execute('''CREATE TABLE "FavoriteProduct" (
-    "id" INTEGER PRIMARY KEY AUTOINCREMENT,
-    "product_id" INTEGER,
-    "name" TEXT,
-    "price" REAL,
-    "imageUrl" TEXT,
-    "quantity" INTEGER,
-    "description" TEXT,
-
-  )
-   
- ''');
-
-    print("database upgraded");
-  }
+  _onUpgrade(Database database, int oldVersion, int newVersion) async {}
 
   selectData(String sql) async {
     Database? database = await db;

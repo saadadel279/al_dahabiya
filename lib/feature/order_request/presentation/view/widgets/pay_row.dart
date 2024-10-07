@@ -49,7 +49,7 @@ class PayRow extends StatelessWidget {
                     height: 45.h,
                     child: Builder(builder: (context) {
                       return ElevatedButton(
-                        onPressed: () {
+                        onPressed: () async {
                           const address = 31;
                           const coupon = "";
                           const paymentType = "الدفع عند الاستلام";
@@ -77,7 +77,7 @@ class PayRow extends StatelessWidget {
                             data: products,
                           );
 
-                          context
+                          await context
                               .read<OrderRequestCubit>()
                               .orderRequest(orderRequestModel);
                           context.read<CartCubit>().clearTable();
