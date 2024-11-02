@@ -1,7 +1,9 @@
 import 'package:al_dahabiya/feature/profile/presentation/widgets/log_out_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
+import '../../../../core/app_router.dart';
 import '../widgets/profile_tab.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -60,7 +62,9 @@ class ProfileScreen extends StatelessWidget {
                     ProfileTab(
                       icon: Icons.location_on_outlined,
                       title: 'العنوان',
-                      onTap: () {},
+                      onTap: () {
+                        GoRouter.of(context).push(AppRouters.kAddressScreen);
+                      },
                     ),
                     ProfileTab(
                       icon: Icons.lock_open_outlined,

@@ -25,6 +25,8 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../feature/address/presentation/view/screen/address_screen.dart';
+
 abstract class AppRouters {
   static const String kFirstRoute = '/first';
   static const String kdefultRoute = '/';
@@ -38,6 +40,7 @@ abstract class AppRouters {
   static const String kCartScreenRoute = '/CartScreen';
   static const String kOrderRequestScreenRoute = '/OrderRequestScreen';
   static const String kSubCategoriesScreenRoute = '/kSubCategoriesScreenRoute';
+  static const String kAddressScreen = '/KAddressScreen';
   static const String kSubCategoProdScreenRoute =
       '/kSubCategoriesProductScreenRoute';
 
@@ -53,6 +56,10 @@ abstract class AppRouters {
       GoRoute(
         path: kFirstRoute,
         builder: (context, state) => const CustomBottomNaveBar(),
+      ),
+      GoRoute(
+        path: kAddressScreen,
+        builder: (context, state) => const AddressScreen(),
       ),
       GoRoute(
         path: kOrderRequestScreenRoute,
