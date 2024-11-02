@@ -6,6 +6,8 @@ import 'package:al_dahabiya/feature/Auth/featuers/login/presentation/view_mode/c
 import 'package:al_dahabiya/feature/Auth/featuers/signup/data/repo/Sign_up_repo.dart';
 import 'package:al_dahabiya/feature/Auth/featuers/signup/presentation/view/sign_up_screen.dart';
 import 'package:al_dahabiya/feature/Auth/featuers/signup/presentation/view_model/cubit/sign_up_cubit.dart';
+import 'package:al_dahabiya/feature/address/data/repo/address_repo.dart';
+import 'package:al_dahabiya/feature/address/presentation/view_model/cubit/address_cubit.dart';
 import 'package:al_dahabiya/feature/cart/presentation/view/cart_screen.dart';
 import 'package:al_dahabiya/feature/favoreties/presentation/view/favoreties_screen.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/home_screen.dart';
@@ -59,7 +61,12 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kAddressScreen,
-        builder: (context, state) => const AddressScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) =>
+              AddressCubit(AddressRepo(apiServices: DioConsumer(dio: Dio())))
+                ..getGovernments(),
+          child: AddressScreen(),
+        ),
       ),
       GoRoute(
         path: kOrderRequestScreenRoute,

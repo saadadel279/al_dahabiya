@@ -11,6 +11,10 @@ class EndPoint {
   static const String getMostVisited = 'most_visited';
   static const String getSlider = 'slider';
   static const String orderRequest = 'orderRequest';
+  static const String getGovernments = 'governoratesdata';
+  static const String getCitys = 'get_cities';
+  static const String getZones = 'get_zones';
+  static const String postAddress = 'address';
 }
 
 class ApiKey {
