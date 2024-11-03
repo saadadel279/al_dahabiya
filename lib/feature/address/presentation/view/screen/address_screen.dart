@@ -30,6 +30,10 @@ class _AddressScreenState extends State<AddressScreen> {
   List<AddressData>? addressData;
 
   String selectedGovern = '';
+  String curentAddress = '';
+  late String curentAddressId;
+
+  late String curentAddressShapingCost;
   late int selectedGovernid;
   late int selectedCityid;
   late int selectedZoneid;
@@ -87,13 +91,28 @@ class _AddressScreenState extends State<AddressScreen> {
                           .map((add) => SelectedListItem(
                                 name: add.address,
                                 value: add.id.toString(),
+                                shippingCost: add.shippingCost.toString(),
                               ))
                           .toList();
                       dropDown(
-                              title: 'اختر عنوانك الحالي من هنا',
-                              data: addressItems,
-                              onSelected: (SelectedListItem) {})
-                          .showModal(context);
+                          title: 'اختر عنوانك الحالي من هنا',
+                          data: addressItems,
+                          onSelected: (SelectedListItem) {
+                            setState(() {
+                              curentAddress = SelectedListItem.name;
+                              curentAddressId = SelectedListItem.value;
+                              curentAddressShapingCost =
+                                  SelectedListItem.shippingCost;
+                              getIt<CacheHelper>().saveData(
+                                  key: 'curentAddress', value: curentAddress);
+                              getIt<CacheHelper>().saveData(
+                                  key: 'curentAddressId',
+                                  value: curentAddressId);
+                              getIt<CacheHelper>().saveData(
+                                  key: 'curentAddressShapingCost',
+                                  value: curentAddressShapingCost);
+                            });
+                          }).showModal(context);
                     },
                     child: const SemulatedDropDown(
                       title: 'اختر عنوانك الحالي من هنا...',
