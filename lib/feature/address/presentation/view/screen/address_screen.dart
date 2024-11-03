@@ -3,6 +3,7 @@ import 'package:al_dahabiya/core/services/locator.dart';
 import 'package:al_dahabiya/core/widgets/custom_button.dart';
 import 'package:al_dahabiya/feature/address/data/models/city_model.dart';
 import 'package:al_dahabiya/feature/address/data/models/government_model.dart';
+import 'package:al_dahabiya/feature/address/data/models/user_address_model.dart';
 import 'package:drop_down_list/model/selected_list_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,20 +27,27 @@ class _AddressScreenState extends State<AddressScreen> {
   List<GovernmentData>? governmentData;
   List<CityData>? cityData;
   List<ZoneData>? zoneData;
+  List<AddressData>? addressData;
 
   String selectedGovern = '';
+  late int selectedGovernid;
+  late int selectedCityid;
+  late int selectedZoneid;
 
   String? selectedCity = "";
 
   String? selectedZone = '';
   bool isLoading = false;
+  TextEditingController addressController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocListener<AddressCubit, AddressState>(
         listener: (context, state) {
-          if (state is GovernmentSuccess) {
+          if (state is GetUserAddressSuccess) {
+            addressData = state.addressData;
+          } else if (state is GovernmentSuccess) {
             governmentData = state.governmentData;
           } else if (state is CitysSuccess) {
             cityData = state.cityData;
@@ -75,16 +83,15 @@ class _AddressScreenState extends State<AddressScreen> {
                   // Button to trigger the dropdown modal
                   InkWell(
                     onTap: () {
+                      final List<SelectedListItem> addressItems = addressData!
+                          .map((add) => SelectedListItem(
+                                name: add.address,
+                                value: add.id.toString(),
+                              ))
+                          .toList();
                       dropDown(
                               title: 'اختر عنوانك الحالي من هنا',
-                              data: [
-                                SelectedListItem(
-                                    name: 'شبين الكوم', value: 1.toString()),
-                                SelectedListItem(
-                                    name: 'القاهرة', value: 2.toString()),
-                                SelectedListItem(
-                                    name: 'الاسكندرية', value: 3.toString()),
-                              ],
+                              data: addressItems,
                               onSelected: (SelectedListItem) {})
                           .showModal(context);
                     },
@@ -102,53 +109,59 @@ class _AddressScreenState extends State<AddressScreen> {
                         color: const Color.fromARGB(255, 85, 85, 85),
                       )),
                   SizedBox(height: 15.h),
-                  BlocListener<AddressCubit, AddressState>(
-                    listener: (context, state) {},
-                    child: InkWell(
-                      onTap: () {
-                        context.read<AddressCubit>().getGovernments();
-                        dropDown(
-                            title: 'اختر المحافظة',
-                            data: [
-                              SelectedListItem(
-                                  name: governmentData![0].name,
-                                  value: governmentData![0].id.toString()),
-                            ],
-                            onSelected: (SelectedListItem) {
-                              getIt<CacheHelper>().saveData(
-                                  key: 'governmentid',
-                                  value: SelectedListItem.value);
-                              setState(() {
-                                selectedGovern = SelectedListItem.name;
-                              });
-                            }).showModal(context);
-                      },
-                      child: SimulatedTiteldDropDown(
-                        hint: 'اختر المحافظة...',
-                        title: selectedGovern,
-                      ),
+                  InkWell(
+                    onTap: () {
+                      final List<SelectedListItem> governmentItems =
+                          governmentData!
+                              .map((gov) => SelectedListItem(
+                                    name: gov.name,
+                                    value: gov.id.toString(),
+                                  ))
+                              .toList();
+
+                      dropDown(
+                        title: 'اختر المحافظة',
+                        data: governmentItems,
+                        onSelected: (SelectedListItem selectedListItem) {
+                          setState(() {
+                            selectedGovern = selectedListItem.name;
+                            selectedGovernid =
+                                int.parse(selectedListItem.value);
+                          });
+                          context
+                              .read<AddressCubit>()
+                              .getCitys(governId: selectedGovernid);
+                        },
+                      ).showModal(context);
+                    },
+                    child: SimulatedTiteldDropDown(
+                      hint: 'اختر المحافظة...',
+                      title: selectedGovern,
                     ),
                   ),
+
                   SizedBox(height: 15.h),
                   InkWell(
                     onTap: () {
-                      context.read<AddressCubit>().getCitys(
-                          governId: int.parse(getIt<CacheHelper>()
-                              .getData(key: 'governmentid')));
+                      final List<SelectedListItem> cityItems = cityData!
+                          .map((city) => SelectedListItem(
+                                name: city.name,
+                                value: city.id.toString(),
+                              ))
+                          .toList();
 
                       dropDown(
                           title: 'اختر المدينة',
-                          data: [
-                            SelectedListItem(
-                                name: cityData![0].name,
-                                value: cityData![0].id.toString()),
-                          ],
+                          data: cityItems,
                           onSelected: (SelectedListItem) {
-                            getIt<CacheHelper>().saveData(
-                                key: 'cityid', value: SelectedListItem.value);
                             setState(() {
                               selectedCity = SelectedListItem.name;
+                              selectedCityid =
+                                  int.parse(SelectedListItem.value);
                             });
+                            context
+                                .read<AddressCubit>()
+                                .getZones(cityId: selectedCityid);
                           }).showModal(context);
                     },
                     child: SimulatedTiteldDropDown(
@@ -159,9 +172,12 @@ class _AddressScreenState extends State<AddressScreen> {
                   SizedBox(height: 15.h),
                   InkWell(
                     onTap: () {
-                      context.read<AddressCubit>().getZones(
-                          cityId: int.parse(
-                              getIt<CacheHelper>().getData(key: 'cityid')));
+                      List<SelectedListItem> zoneItems = zoneData!
+                          .map((zone) => SelectedListItem(
+                                name: zone.name,
+                                value: zone.id.toString(),
+                              ))
+                          .toList();
                       dropDown(
                           title: 'اختر المنطقة',
                           data: [
@@ -175,6 +191,7 @@ class _AddressScreenState extends State<AddressScreen> {
                                 key: 'zoneid', value: selectedList.value);
                             setState(() {
                               selectedZone = selectedList.name;
+                              selectedZoneid = int.parse(selectedList.value);
                             });
                           }).showModal(context);
                     },
@@ -184,16 +201,30 @@ class _AddressScreenState extends State<AddressScreen> {
                     ),
                   ),
                   SizedBox(height: 15.h),
+                  Directionality(
+                    textDirection: TextDirection.rtl,
+                    child: TextField(
+                        controller: addressController,
+                        decoration: const InputDecoration(
+                          hintText: ' عنوانك',
+                          hintStyle:
+                              TextStyle(color: Colors.grey, fontSize: 20),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(20),
+                            ),
+                          ),
+                        )),
+                  ),
+                  SizedBox(height: 15.h),
+
                   CustomButton(
                       onTap: () {
                         context.read<AddressCubit>().addAddress(
-                            int.parse(getIt<CacheHelper>()
-                                .getData(key: 'governmentid')),
-                            int.parse(
-                                getIt<CacheHelper>().getData(key: 'cityid')),
-                            int.parse(
-                                getIt<CacheHelper>().getData(key: 'zoneid')),
-                            'address');
+                            selectedGovernid,
+                            selectedCityid,
+                            selectedZoneid,
+                            addressController.text);
                       },
                       title: 'اضافة عنوان جديد',
                       isloading: false)

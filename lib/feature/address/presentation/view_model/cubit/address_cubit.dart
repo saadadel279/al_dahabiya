@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 
 import '../../../data/models/added_address_model.dart';
 import '../../../data/models/government_model.dart';
+import '../../../data/models/user_address_model.dart';
 
 part 'address_state.dart';
 
@@ -53,6 +54,16 @@ class AddressCubit extends Cubit<AddressState> {
       emit(AddAddressFailure(errMessage: error));
     }, (addedAddress) {
       emit(AddAddressSuccess(addressModel: addedAddress));
+    });
+  }
+
+  Future<void> getUserAddress() async {
+    emit(GetUserAddressLoading());
+    var response = await addressRepo.getUserAddress();
+    response.fold((error) {
+      emit(GetUserAddressFailure(errMessage: error));
+    }, (address) {
+      emit(GetUserAddressSuccess(addressData: address));
     });
   }
 }

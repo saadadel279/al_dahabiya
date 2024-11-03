@@ -60,3 +60,17 @@ final class AddAddressFailure extends AddressState {
 
   AddAddressFailure({required this.errMessage});
 }
+
+final class GetUserAddressLoading extends AddressState {}
+
+final class GetUserAddressSuccess extends AddressState {
+  final List<AddressData>? addressData;
+
+  GetUserAddressSuccess({required this.addressData});
+}
+
+final class GetUserAddressFailure extends AddressState {
+  final String errMessage;
+
+  GetUserAddressFailure({required this.errMessage});
+}

@@ -15,6 +15,7 @@ class EndPoint {
   static const String getCitys = 'get_cities';
   static const String getZones = 'get_zones';
   static const String postAddress = 'address';
+  static const String useraddresses = 'user/addresses';
 }
 
 class ApiKey {

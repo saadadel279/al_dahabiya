@@ -7,6 +7,7 @@ import 'package:al_dahabiya/feature/address/data/models/zone_model.dart';
 import 'package:dartz/dartz.dart';
 
 import '../models/added_address_model.dart';
+import '../models/user_address_model.dart';
 
 class AddressRepo {
   final ApiServices apiServices;
@@ -75,6 +76,21 @@ class AddressRepo {
       });
       if (response['code'] == 200) {
         return right(AddedAddressModel.fromJson(response));
+      } else {
+        return left(response['message']);
+      }
+    } on ServerException catch (e) {
+      return left(e.errModel.message);
+    } catch (e) {
+      return left('something went wrong');
+    }
+  }
+
+  Future<Either<String, List<AddressData>?>> getUserAddress() async {
+    try {
+      var response = await apiServices.get(EndPoint.useraddresses);
+      if (response['code'] == 200) {
+        return right(UserAddressModel.fromJson(response).data);
       } else {
         return left(response['message']);
       }

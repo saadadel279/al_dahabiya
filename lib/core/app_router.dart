@@ -64,8 +64,9 @@ abstract class AppRouters {
         builder: (context, state) => BlocProvider(
           create: (context) =>
               AddressCubit(AddressRepo(apiServices: DioConsumer(dio: Dio())))
-                ..getGovernments(),
-          child: AddressScreen(),
+                ..getGovernments()
+                ..getUserAddress(),
+          child: const AddressScreen(),
         ),
       ),
       GoRoute(
