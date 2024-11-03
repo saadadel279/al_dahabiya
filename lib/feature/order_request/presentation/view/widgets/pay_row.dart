@@ -1,7 +1,10 @@
+import 'package:al_dahabiya/core/app_router.dart';
+import 'package:al_dahabiya/core/widgets/snak_bar.dart';
 import 'package:al_dahabiya/feature/cart/presentation/view_mode/cubit/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../cart/data/models/cart_item_model.dart';
 import '../../../data/models/order_request_model.dart';
@@ -11,9 +14,13 @@ class PayRow extends StatelessWidget {
   const PayRow({
     super.key,
     required this.cartItemsInOrder,
+    required this.shipingCost,
+    required this.addressId,
   });
 
   final List<CartItemModel> cartItemsInOrder;
+  final double shipingCost;
+  final int addressId;
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +43,7 @@ class PayRow extends StatelessWidget {
                             fontSize: 20.sp, fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        ' ${state.totalPrice! + 50} ج.م',
+                        ' ${state.totalPrice! + shipingCost} ج.م',
                         style: TextStyle(
                             color: Colors.red,
                             fontSize: 20.sp,
@@ -50,7 +57,7 @@ class PayRow extends StatelessWidget {
                     child: Builder(builder: (context) {
                       return ElevatedButton(
                         onPressed: () async {
-                          const address = 31;
+                          int address = addressId;
                           const coupon = "";
                           const paymentType = "الدفع عند الاستلام";
                           const deliveryTime = "sdfds";
@@ -80,6 +87,10 @@ class PayRow extends StatelessWidget {
                           await context
                               .read<OrderRequestCubit>()
                               .orderRequest(orderRequestModel);
+                          showSnackBar(context, 'تم طلب الاوردر');
+
+                          GoRouter.of(context).push(AppRouters.kFirstRoute);
+
                           context.read<CartCubit>().clearTable();
                         },
                         style: ElevatedButton.styleFrom(

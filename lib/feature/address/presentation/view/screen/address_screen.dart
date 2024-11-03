@@ -89,9 +89,11 @@ class _AddressScreenState extends State<AddressScreen> {
                     onTap: () {
                       final List<SelectedListItem> addressItems = addressData!
                           .map((add) => SelectedListItem(
+                                address: '',
+                                shapingCost: '',
                                 name: add.address,
                                 value: add.id.toString(),
-                                shippingCost: add.shippingCost.toString(),
+                                // shapingCost: add.shippingCost.toString(),
                               ))
                           .toList();
                       dropDown(
@@ -101,16 +103,12 @@ class _AddressScreenState extends State<AddressScreen> {
                             setState(() {
                               curentAddress = SelectedListItem.name;
                               curentAddressId = SelectedListItem.value;
-                              curentAddressShapingCost =
-                                  SelectedListItem.shippingCost;
+
                               getIt<CacheHelper>().saveData(
                                   key: 'curentAddress', value: curentAddress);
                               getIt<CacheHelper>().saveData(
                                   key: 'curentAddressId',
                                   value: curentAddressId);
-                              getIt<CacheHelper>().saveData(
-                                  key: 'curentAddressShapingCost',
-                                  value: curentAddressShapingCost);
                             });
                           }).showModal(context);
                     },
@@ -133,6 +131,8 @@ class _AddressScreenState extends State<AddressScreen> {
                       final List<SelectedListItem> governmentItems =
                           governmentData!
                               .map((gov) => SelectedListItem(
+                                    address: '',
+                                    shapingCost: '',
                                     name: gov.name,
                                     value: gov.id.toString(),
                                   ))
@@ -164,6 +164,8 @@ class _AddressScreenState extends State<AddressScreen> {
                     onTap: () {
                       final List<SelectedListItem> cityItems = cityData!
                           .map((city) => SelectedListItem(
+                                address: '',
+                                shapingCost: '',
                                 name: city.name,
                                 value: city.id.toString(),
                               ))
@@ -193,18 +195,15 @@ class _AddressScreenState extends State<AddressScreen> {
                     onTap: () {
                       List<SelectedListItem> zoneItems = zoneData!
                           .map((zone) => SelectedListItem(
+                                address: '',
+                                shapingCost: '',
                                 name: zone.name,
                                 value: zone.id.toString(),
                               ))
                           .toList();
                       dropDown(
                           title: 'اختر المنطقة',
-                          data: [
-                            SelectedListItem(
-                              name: zoneData![0].name,
-                              value: zoneData![0].id.toString(),
-                            ),
-                          ],
+                          data: zoneItems,
                           onSelected: (SelectedListItem selectedList) {
                             getIt<CacheHelper>().saveData(
                                 key: 'zoneid', value: selectedList.value);

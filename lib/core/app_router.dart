@@ -71,7 +71,12 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kOrderRequestScreenRoute,
-        builder: (context, state) => const OrderRequestScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) =>
+              AddressCubit(AddressRepo(apiServices: DioConsumer(dio: Dio())))
+                ..getUserAddress(),
+          child: const OrderRequestScreen(),
+        ),
       ),
       GoRoute(
           path: kSubCategoProdScreenRoute,
