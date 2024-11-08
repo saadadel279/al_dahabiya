@@ -6,6 +6,8 @@ import 'package:al_dahabiya/feature/Auth/featuers/login/presentation/view_mode/c
 import 'package:al_dahabiya/feature/Auth/featuers/signup/data/repo/Sign_up_repo.dart';
 import 'package:al_dahabiya/feature/Auth/featuers/signup/presentation/view/sign_up_screen.dart';
 import 'package:al_dahabiya/feature/Auth/featuers/signup/presentation/view_model/cubit/sign_up_cubit.dart';
+import 'package:al_dahabiya/feature/Auth/featuers/update_password/data/repo/updata_password_repo.dart';
+import 'package:al_dahabiya/feature/Auth/featuers/update_password/presentation/view_model/cubit/update_password_cubit.dart';
 import 'package:al_dahabiya/feature/address/data/repo/address_repo.dart';
 import 'package:al_dahabiya/feature/address/presentation/view_model/cubit/address_cubit.dart';
 import 'package:al_dahabiya/feature/cart/presentation/view/cart_screen.dart';
@@ -27,6 +29,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../feature/Auth/featuers/update_password/presentation/view/screen/update_password.dart';
 import '../feature/address/presentation/view/screen/address_screen.dart';
 
 abstract class AppRouters {
@@ -43,6 +46,7 @@ abstract class AppRouters {
   static const String kOrderRequestScreenRoute = '/OrderRequestScreen';
   static const String kSubCategoriesScreenRoute = '/kSubCategoriesScreenRoute';
   static const String kAddressScreen = '/KAddressScreen';
+  static const String kUpdatePasswordScreen = '/kUpdatePasswordScreen';
   static const String kSubCategoProdScreenRoute =
       '/kSubCategoriesProductScreenRoute';
 
@@ -58,6 +62,14 @@ abstract class AppRouters {
       GoRoute(
         path: kFirstRoute,
         builder: (context, state) => const CustomBottomNaveBar(),
+      ),
+      GoRoute(
+        path: kUpdatePasswordScreen,
+        builder: (context, state) => BlocProvider(
+          create: (context) => UpdatePasswordCubit(
+              UpdataPasswordRepo(apiServices: DioConsumer(dio: Dio()))),
+          child: UpdatePasswordScreen(),
+        ),
       ),
       GoRoute(
         path: kAddressScreen,

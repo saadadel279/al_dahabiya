@@ -69,7 +69,10 @@ class ProfileScreen extends StatelessWidget {
                     ProfileTab(
                       icon: Icons.lock_open_outlined,
                       title: 'تغيير كلمة المرور',
-                      onTap: () {},
+                      onTap: () {
+                        GoRouter.of(context)
+                            .push(AppRouters.kUpdatePasswordScreen);
+                      },
                     ),
                     const LogOutText()
                   ],

@@ -13,6 +13,7 @@ class ApiInterceptor extends Interceptor {
 
     options.headers['Content-Type'] = 'application/json';
     options.headers['Accept'] = 'application/json';
+    options.headers['followRedirects'] = true;
     super.onRequest(options, handler);
   }
 }

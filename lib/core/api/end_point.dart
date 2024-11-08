@@ -16,6 +16,7 @@ class EndPoint {
   static const String getZones = 'get_zones';
   static const String postAddress = 'address';
   static const String useraddresses = 'user/addresses';
+  static const String updatePassword = 'myinfo/update_password';
 }
 
 class ApiKey {
