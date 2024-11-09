@@ -31,6 +31,7 @@ import 'package:go_router/go_router.dart';
 
 import '../feature/Auth/featuers/update_password/presentation/view/screen/update_password.dart';
 import '../feature/address/presentation/view/screen/address_screen.dart';
+import '../feature/my_orders/presentation/view/screen/my_orders_screen.dart';
 
 abstract class AppRouters {
   static const String kFirstRoute = '/first';
@@ -47,6 +48,7 @@ abstract class AppRouters {
   static const String kSubCategoriesScreenRoute = '/kSubCategoriesScreenRoute';
   static const String kAddressScreen = '/KAddressScreen';
   static const String kUpdatePasswordScreen = '/kUpdatePasswordScreen';
+  static const String kMyOrdersScreenScreen = '/kMyOrdersScreenScreen';
   static const String kSubCategoProdScreenRoute =
       '/kSubCategoriesProductScreenRoute';
 
@@ -62,6 +64,10 @@ abstract class AppRouters {
       GoRoute(
         path: kFirstRoute,
         builder: (context, state) => const CustomBottomNaveBar(),
+      ),
+      GoRoute(
+        path: kMyOrdersScreenScreen,
+        builder: (context, state) => const MyOrdersScreen(),
       ),
       GoRoute(
         path: kUpdatePasswordScreen,

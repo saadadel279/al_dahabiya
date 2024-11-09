@@ -67,6 +67,14 @@ class ProfileScreen extends StatelessWidget {
                       },
                     ),
                     ProfileTab(
+                      icon: Icons.list_outlined,
+                      title: 'طلباتي',
+                      onTap: () {
+                        GoRouter.of(context)
+                            .push(AppRouters.kMyOrdersScreenScreen);
+                      },
+                    ),
+                    ProfileTab(
                       icon: Icons.lock_open_outlined,
                       title: 'تغيير كلمة المرور',
                       onTap: () {
