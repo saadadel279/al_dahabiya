@@ -24,4 +24,19 @@ class MyOrdersRepo {
       return left('something went wrong');
     }
   }
+
+  Future<Either<String, String>> cancelOrder(int orderId) async {
+    try {
+      var response = await apiServices.get('${EndPoint.cancelOrder}/$orderId');
+      if (response['code'] == 400) {
+        return right(response['message']);
+      } else {
+        return left(response['message']);
+      }
+    } on ServerException catch (e) {
+      return left(e.errModel.message);
+    } catch (e) {
+      return left('something went wrong');
+    }
+  }
 }

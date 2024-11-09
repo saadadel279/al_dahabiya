@@ -14,6 +14,8 @@ import 'package:al_dahabiya/feature/cart/presentation/view/cart_screen.dart';
 import 'package:al_dahabiya/feature/favoreties/presentation/view/favoreties_screen.dart';
 import 'package:al_dahabiya/feature/home/presentation/view/home_screen.dart';
 import 'package:al_dahabiya/feature/initial/navebar.dart';
+import 'package:al_dahabiya/feature/my_orders/data/repo/my_orders_repo.dart';
+import 'package:al_dahabiya/feature/my_orders/presentation/view_model/my_orsers_cubit/my_orders_cubit.dart';
 import 'package:al_dahabiya/feature/order_request/presentation/view/order_screen.dart';
 import 'package:al_dahabiya/feature/product_details/presentation/view/product_details_screen.dart';
 import 'package:al_dahabiya/feature/products/data/repo/brand_product_repo.dart';
@@ -67,7 +69,12 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kMyOrdersScreenScreen,
-        builder: (context, state) => const MyOrdersScreen(),
+        builder: (context, state) => BlocProvider(
+          create: (context) =>
+              MyOrdersCubit(MyOrdersRepo(apiServices: DioConsumer(dio: Dio())))
+                ..getMyOrders(),
+          child: const MyOrdersScreen(),
+        ),
       ),
       GoRoute(
         path: kUpdatePasswordScreen,

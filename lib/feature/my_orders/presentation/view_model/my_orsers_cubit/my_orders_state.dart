@@ -16,3 +16,15 @@ final class MyOrdersFailure extends MyOrdersState {
   final String errMessage;
   MyOrdersFailure({required this.errMessage});
 }
+
+final class CancelOrderLoading extends MyOrdersState {}
+
+final class CancelOrderSuccses extends MyOrdersState {
+  final String message;
+  CancelOrderSuccses({required this.message});
+}
+
+final class CancelOrderFailure extends MyOrdersState {
+  final String errMessage;
+  CancelOrderFailure({required this.errMessage});
+}

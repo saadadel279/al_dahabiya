@@ -15,4 +15,11 @@ class MyOrdersCubit extends Cubit<MyOrdersState> {
     result.fold((failure) => emit(MyOrdersFailure(errMessage: failure)),
         (myOrders) => emit(MyOrderSuccess(myOrdersModel: myOrders)));
   }
+
+  Future<void> cancelOrder(int orderId) async {
+    emit(CancelOrderLoading());
+    var result = await myOrdersRepo.cancelOrder(orderId);
+    result.fold((failure) => emit(CancelOrderFailure(errMessage: failure)),
+        (myOrders) => emit(CancelOrderSuccses(message: myOrders)));
+  }
 }
