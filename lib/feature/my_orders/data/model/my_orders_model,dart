@@ -1,0 +1,92 @@
+class MyOrdersModel {
+  final int code;
+  final List<Order> data;
+
+  MyOrdersModel({
+    required this.code,
+    required this.data,
+  });
+
+  factory MyOrdersModel.fromJson(Map<String, dynamic> json) {
+    return MyOrdersModel(
+      code: json['code'] as int,
+      data: (json['data'] as List)
+          .map((order) => Order.fromJson(order as Map<String, dynamic>))
+          .toList(),
+    );
+  }
+
+ 
+}
+
+class Order {
+  final int id;
+  final String paymentType;
+  final double total;
+  final double shipping;
+  final String date;
+  final String orderCurrency;
+  final String status;
+  final int statusChange;
+  final List<OrderStatus> allStatus;
+  final int usePoints;
+  final String points;
+  final double pointPrice;
+  final List<dynamic> products; // Assuming products is a list with dynamic content
+
+  Order({
+    required this.id,
+    required this.paymentType,
+    required this.total,
+    required this.shipping,
+    required this.date,
+    required this.orderCurrency,
+    required this.status,
+    required this.statusChange,
+    required this.allStatus,
+    required this.usePoints,
+    required this.points,
+    required this.pointPrice,
+    required this.products,
+  });
+
+  factory Order.fromJson(Map<String, dynamic> json) {
+    return Order(
+      id: json['id'] as int,
+      paymentType: json['payment_type'] as String,
+      total: (json['total'] as num).toDouble(),
+      shipping: (json['shipping'] as num).toDouble(),
+      date: json['date'] as String,
+      orderCurrency: json['order_currency'] as String,
+      status: json['status'] as String,
+      statusChange: json['status_change'] as int,
+      allStatus: (json['allStatus'] as List)
+          .map((status) => OrderStatus.fromJson(status as Map<String, dynamic>))
+          .toList(),
+      usePoints: json['use_points'] as int,
+      points: json['points'] as String,
+      pointPrice: (json['point_price'] as num).toDouble(),
+      products: json['products'] as List<dynamic>,
+    );
+  }
+
+
+}
+
+class OrderStatus {
+  final String title;
+  final String date;
+
+  OrderStatus({
+    required this.title,
+    required this.date,
+  });
+
+  factory OrderStatus.fromJson(Map<String, dynamic> json) {
+    return OrderStatus(
+      title: json['title'] as String,
+      date: json['date'] as String,
+    );
+  }
+
+}
