@@ -1,23 +1,44 @@
 import 'package:al_dahabiya/core/database/cashe_helper.dart';
-import 'package:al_dahabiya/core/database/sql_db.dart';
 import 'package:al_dahabiya/core/models/product_model.dart';
 import 'package:al_dahabiya/core/widgets/snak_bar.dart';
 import 'package:al_dahabiya/feature/cart/data/repo/cart_repo.dart';
-import 'package:al_dahabiya/feature/cart/presentation/view_mode/cubit/cart_cubit.dart';
 import 'package:al_dahabiya/feature/product_details/presentation/view/widgets/product_details_section.dart';
 import 'package:al_dahabiya/feature/product_details/presentation/view/widgets/product_titile_section.dart';
-import 'package:al_dahabiya/feature/product_details/presentation/view_model/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ProductDetailsScreen extends StatelessWidget {
+import '../../../../core/database/sql_db.dart';
+import '../../../cart/presentation/view_mode/cubit/cart_cubit.dart';
+import '../view_model/cubit/counter_cubit.dart';
+
+class ProductDetailsScreen extends StatefulWidget {
   const ProductDetailsScreen({
     super.key,
     this.productOfBrand,
   });
 
   final Product? productOfBrand;
+
+  @override
+  _ProductDetailsScreenState createState() => _ProductDetailsScreenState();
+}
+
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  bool isFav = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkIfFavorite();
+  }
+
+  Future<void> _checkIfFavorite() async {
+    bool favoriteStatus = await isFavorite(widget.productOfBrand!.id!);
+    setState(() {
+      isFav = favoriteStatus;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +59,6 @@ class ProductDetailsScreen extends StatelessWidget {
             showSnackBar(context, 'تمت الاضافة الي السلة');
           } else if (state is CartFailure) {
             showSnackBar(context, 'هذا المنتج موجود بالفعل في السلة');
-          } else {
-            print('Current state: $state');
           }
         },
         child: Scaffold(
@@ -69,15 +88,15 @@ class ProductDetailsScreen extends StatelessWidget {
                           ProductDetailsSection(
                             isCounter: false,
                             detailsTitle: 'الخامات',
-                            details: productOfBrand!.desc ??
+                            details: widget.productOfBrand!.desc ??
                                 'مصنوع من البلاستيك المقوى',
                           ),
                           SizedBox(height: 20.h),
                           ProductDetailsSection(
                             isCounter: false,
                             detailsTitle: 'وصف المنتج',
-                            details: productOfBrand!.desc ??
-                                'دلو يستخدم لتذويب المعقمات بإستخدام وسائل التنظبف في الماء عند المسح  العلامة التجارية : الهلال والنجمة',
+                            details: widget.productOfBrand!.desc ??
+                                'دلو يستخدم لتذويب المعقمات بإستخدام وسائل التنظبف في الماء عند المسح العلامة التجارية : الهلال والنجمة',
                           ),
                           SizedBox(height: 20.h),
                           const ProductDetailsSection(
@@ -91,10 +110,9 @@ class ProductDetailsScreen extends StatelessWidget {
                                 onTap: () {
                                   var productQuantity =
                                       CacheHelper().getData(key: 'counter');
-
                                   context.read<CartCubit>().insertCartItem(
-                                      productOfBrand!.id!,
-                                      '''INSERT INTO cart (product_id, name, price, imageUrl, quantity) VALUES (${productOfBrand!.id!}, '${productOfBrand!.name!}', ${productOfBrand!.price!}, '${productOfBrand!.image!}', $productQuantity)''',
+                                      widget.productOfBrand!.id!,
+                                      '''INSERT INTO cart (product_id, name, price, imageUrl, quantity) VALUES (${widget.productOfBrand!.id!}, '${widget.productOfBrand!.name!}', ${widget.productOfBrand!.price!}, '${widget.productOfBrand!.image!}', $productQuantity)''',
                                       productQuantity);
                                 },
                                 child: Container(
@@ -121,10 +139,34 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                   Positioned(
                     top: -100.h,
-                    child: ProductTitelSection(
-                      productOfBrand: productOfBrand,
+                    child: Column(
+                      children: [
+                        ProductTitelSection(
+                          productOfBrand: widget.productOfBrand,
+                        ),
+                        // Favorite Icon Section
+                        IconButton(
+                          icon: Icon(
+                            isFav ? Icons.favorite : Icons.favorite_border,
+                            color: Colors.red,
+                            size: 30,
+                          ),
+                          onPressed: () async {
+                            if (isFav) {
+                              await removeFavorite(widget.productOfBrand!.id!);
+                              showSnackBar(context, 'Removed from favorites');
+                            } else {
+                              await addFavorite(widget.productOfBrand!);
+                              showSnackBar(context, 'Added to favorites');
+                            }
+                            setState(() {
+                              isFav = !isFav;
+                            });
+                          },
+                        ),
+                      ],
                     ),
-                  )
+                  ),
                 ],
               ),
             ],
@@ -132,5 +174,24 @@ class ProductDetailsScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> addFavorite(Product product) async {
+    SqlDB sqlDB = SqlDB();
+    await sqlDB.insertData(
+        '''INSERT INTO favorites (product_id, name, price, imageUrl) VALUES (${product.id!}, '${product.name!}', ${product.price!}, '${product.image!}')''');
+  }
+
+  Future<void> removeFavorite(int productId) async {
+    SqlDB sqlDB = SqlDB();
+    await sqlDB
+        .deleteData('DELETE FROM favorites WHERE product_id = $productId');
+  }
+
+  Future<bool> isFavorite(int productId) async {
+    SqlDB sqlDB = SqlDB();
+    var result = await sqlDB
+        .selectData('SELECT * FROM favorites WHERE product_id = $productId');
+    return result.isNotEmpty;
   }
 }

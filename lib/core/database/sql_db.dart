@@ -30,6 +30,16 @@ class SqlDB {
   "quantity" INTEGER
 )
 ''');
+
+    await database.execute('''
+      CREATE TABLE "favorites" (
+        "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+        "product_id" INTEGER UNIQUE,
+        "name" TEXT,
+        "price" REAL,
+        "imageUrl" TEXT
+      )
+    ''');
     print("database created");
   }
 
