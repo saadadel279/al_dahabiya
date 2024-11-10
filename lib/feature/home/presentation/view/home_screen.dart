@@ -53,7 +53,6 @@ class HomeScreen extends StatelessWidget {
                   const CategoryTitleRow(
                     categoryName: 'البراندات',
                     categoryAction: 'مشاهدة الكل',
-                    categoryActionNumber: '1',
                   ),
                   SizedBox(height: 15.h),
                   BlocProvider(
