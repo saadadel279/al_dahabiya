@@ -5,7 +5,7 @@ sealed class BrandsState {}
 
 final class BrandsInitial extends BrandsState {}
 
-final class CategoriesLoading extends BrandsState {}
+final class BrandsLoading extends BrandsState {}
 
 final class BrandsSuccess extends BrandsState {
   final BrandsModel? categoriesModel;

@@ -6,13 +6,13 @@ import 'package:meta/meta.dart';
 part 'brands_state.dart';
 
 class BrandsCubit extends Cubit<BrandsState> {
-  BrandsCubit(this.categoriesRepo) : super(BrandsInitial());
+  BrandsCubit(this.brandsRepo) : super(BrandsInitial());
 
-  final BrandsRepo categoriesRepo;
+  final BrandsRepo brandsRepo;
 
-  Future<void> getCategories() async {
-    emit(CategoriesLoading());
-    var response = await categoriesRepo.getCategories();
+  Future<void> getBrands() async {
+    emit(BrandsLoading());
+    var response = await brandsRepo.getBrands();
     response.fold((error) => emit(BrandsFailure(errMessage: error)),
         (categories) => emit(BrandsSuccess(categoriesModel: categories)));
   }

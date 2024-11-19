@@ -9,7 +9,7 @@ class BrandsRepo {
   BrandsModel? brandsModel;
 
   BrandsRepo({required this.apiServices});
-  Future<Either<String, BrandsModel>> getCategories() async {
+  Future<Either<String, BrandsModel>> getBrands() async {
     try {
       var response = await apiServices.get(EndPoint.getBrands);
       if (response['code'] == 200) {

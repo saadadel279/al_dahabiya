@@ -19,6 +19,7 @@ class EndPoint {
   static const String cancelOrder = 'cancelOrder/';
   static const String useraddresses = 'user/addresses';
   static const String updatePassword = 'myinfo/update_password';
+  static const String getFilterProduct = 'searchByFilter';
 }
 
 class ApiKey {

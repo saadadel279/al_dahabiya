@@ -58,7 +58,7 @@ class HomeScreen extends StatelessWidget {
                   BlocProvider(
                     create: (context) => BrandsCubit(
                         BrandsRepo(apiServices: DioConsumer(dio: Dio())))
-                      ..getCategories(),
+                      ..getBrands(),
                     child: const CategoriesListView(),
                   ),
                   SizedBox(height: 15.h),

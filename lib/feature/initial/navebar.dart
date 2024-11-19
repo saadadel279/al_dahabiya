@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../favoreties/presentation/view/favoreties_screen.dart';
+import '../filter/presentation/view/screen/filter_screen.dart';
 
 class CustomBottomNaveBar extends StatefulWidget {
   const CustomBottomNaveBar({super.key});
@@ -22,6 +23,7 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
     const FavoritsScreen(),
     const CategoriesScreen(),
     const CartScreen(),
+    const FilterScreen(),
     const ProfileScreen(),
   ];
 
@@ -64,6 +66,12 @@ class _CustomBottomNaveBarState extends State<CustomBottomNaveBar> {
               Icons.shopping_cart_outlined,
             ),
             label: 'الاصناف',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.filter_alt_outlined,
+            ),
+            label: 'الفلتر',
           ),
           BottomNavigationBarItem(
             icon: Icon(
