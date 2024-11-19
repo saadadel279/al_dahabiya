@@ -24,7 +24,6 @@ class FilterScreen extends StatefulWidget {
   State<FilterScreen> createState() => _FilterScreenState();
 }
 
-// Global Variables
 int cat = 0;
 final List<List> price = [
   [50, 10000],
@@ -41,7 +40,6 @@ List<BrandsModel>? brandsModel;
 List<Product>? products;
 Product? productDetails;
 
-// Selected Filters
 List<int> selectedPrice = [50, 10000];
 int selectedBrand = 46;
 int selectedCategories = 78;
@@ -82,7 +80,6 @@ class _FilterScreenState extends State<FilterScreen> {
             body: SafeArea(
               child: Column(
                 children: [
-                  // Header
                   Container(
                     height: 70.h,
                     color: const Color(0xFFCB6D7F),
@@ -134,7 +131,6 @@ class _FilterScreenState extends State<FilterScreen> {
                   Expanded(
                     child: Column(
                       children: [
-                        // Filters Row
                         Material(
                           elevation: 5,
                           child: Container(
@@ -142,7 +138,6 @@ class _FilterScreenState extends State<FilterScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                // Categories Filter
                                 Expanded(
                                   child: InkWell(
                                     onTap: () {
@@ -178,7 +173,6 @@ class _FilterScreenState extends State<FilterScreen> {
                                   ),
                                 ),
 
-                                // Brands Filter
                                 Expanded(
                                   child: InkWell(
                                     onTap: () {
@@ -214,7 +208,6 @@ class _FilterScreenState extends State<FilterScreen> {
                                   ),
                                 ),
 
-                                // Price Filter
                                 Expanded(
                                   child: InkWell(
                                     onTap: () {
@@ -253,7 +246,6 @@ class _FilterScreenState extends State<FilterScreen> {
                           ),
                         ),
 
-                        // Products Grid
                         SizedBox(height: 20.h),
                         Expanded(
                           child: Padding(
