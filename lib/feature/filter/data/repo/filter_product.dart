@@ -13,7 +13,7 @@ class FilterProductRepo {
   FilterProductRepo({required this.apiServices});
 
   Future<Either<String, FilteredProductModel?>> getFilterProduct(
-    int cat,
+    int? cat,
     List brands,
     List price,
   ) async {

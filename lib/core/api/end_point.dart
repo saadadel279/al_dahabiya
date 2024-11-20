@@ -20,6 +20,8 @@ class EndPoint {
   static const String useraddresses = 'user/addresses';
   static const String updatePassword = 'myinfo/update_password';
   static const String getFilterProduct = 'searchByFilter';
+  static const String getSearchProduct = 'products/search/';
+
 }
 
 class ApiKey {

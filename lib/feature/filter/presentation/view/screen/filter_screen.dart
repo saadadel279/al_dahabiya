@@ -38,9 +38,8 @@ bool isLoading = true;
 List<CategoryResponseModel>? categories;
 List<BrandsModel>? brandsModel;
 List<Product>? products;
-Product? productDetails;
 
-List<int> selectedPrice = [50, 10000];
+List<int> selectedPrice = [0, 10000000];
 int selectedBrand = 46;
 int selectedCategories = 78;
 String selectedCategoriesName = 'الكل';
@@ -56,7 +55,7 @@ class _FilterScreenState extends State<FilterScreen> {
       )
         ..getBrands()
         ..getCategories()
-        ..getFilterProduct(selectedCategories, [selectedBrand], selectedPrice),
+        ..getFilterProduct(null, [], selectedPrice),
       child: BlocListener<FilterProductCubit, FilterProductState>(
         listener: (context, state) {
           setState(() {

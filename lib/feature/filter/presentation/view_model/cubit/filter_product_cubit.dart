@@ -12,7 +12,7 @@ class FilterProductCubit extends Cubit<FilterProductState> {
   FilterProductCubit(this.filterProductRepo) : super(FilterProductInitial());
   final FilterProductRepo filterProductRepo;
 
-  Future<void> getFilterProduct(int cat, List brands, List price) async {
+  Future<void> getFilterProduct(int? cat, List brands, List price) async {
     emit(FilterProductLoading());
     final result = await filterProductRepo.getFilterProduct(cat, brands, price);
     result.fold((error) => emit(FilterProductFailure(error)),
