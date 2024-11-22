@@ -52,11 +52,13 @@ class _SearchScreenState extends State<SearchScreen> {
               decoration: const BoxDecoration(
                 color: Color(0xFFD04430),
                 boxShadow: [
+
                   BoxShadow(
                     color: Colors.black26,
                     blurRadius: 5,
                     spreadRadius: 0,
                     offset: Offset(0, 5),
+
                   ),
                 ],
               ),
@@ -67,7 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     searchFieldDecoration: BoxDecoration(color: Colors.white),
                     closeIconColor: Colors.white,
                     backIconColor: Colors.white,
-                    centerTitle: 'اكتب هنا اللي بتدور علية',
+                    centerTitle: ' اكتب هنا اللي بتدور علية',
                     centerTitleStyle:
                         TextStyle(color: Colors.white, fontSize: 18.sp),
                     searchIconColor: Colors.white,
