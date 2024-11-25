@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/services/locator.dart';
-import 'core/services/notification/local_notification/local_notification.dart';
 import 'core/services/notification/push_notification/push_notification.dart';
 import 'firebase_options.dart';
 
@@ -16,11 +15,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await Future.wait([
-    PushNotification.init(),
-    LocalNotificationService.init(),
-  ]);
-
+  await PushNotification.init();
   setupServiceLocator();
   runApp(const AlDahabiya());
 }

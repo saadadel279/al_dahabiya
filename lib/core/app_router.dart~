@@ -75,6 +75,7 @@ abstract class AppRouters {
       GoRoute(
         path: kNotificationDetailsRoute,
         builder: (context, state) {
+          // Retrieve notification data from state
           final Map<String, String>? data = state.extra as Map<String, String>?;
           return NotificationDetailsScreen(data: data);
         },
