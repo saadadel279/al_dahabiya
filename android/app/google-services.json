@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "153167534557",
+    "project_id": "aldahabiya-1e5d4",
+    "storage_bucket": "aldahabiya-1e5d4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153167534557:android:9ff366519d9792b7563e34",
+        "android_client_info": {
+          "package_name": "com.example.al_dahabiya"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUGS8gI-hX_9IIMT0O55hQ_a37KOpjPmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:153167534557:android:b04632b93a9d78f4563e34",
+        "android_client_info": {
+          "package_name": "com.pioneer.al_dahabiya"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBUGS8gI-hX_9IIMT0O55hQ_a37KOpjPmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
