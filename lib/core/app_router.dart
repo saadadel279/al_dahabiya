@@ -16,7 +16,6 @@ import 'package:al_dahabiya/feature/home/presentation/view/home_screen.dart';
 import 'package:al_dahabiya/feature/initial/navebar.dart';
 import 'package:al_dahabiya/feature/my_orders/data/repo/my_orders_repo.dart';
 import 'package:al_dahabiya/feature/my_orders/presentation/view_model/my_orsers_cubit/my_orders_cubit.dart';
-import 'package:al_dahabiya/feature/notification_details/presentation/view/notification_details_screen.dart';
 import 'package:al_dahabiya/feature/order_request/presentation/view/order_screen.dart';
 import 'package:al_dahabiya/feature/product_details/presentation/view/product_details_screen.dart';
 import 'package:al_dahabiya/feature/products/data/repo/brand_product_repo.dart';
@@ -40,7 +39,6 @@ import '../feature/search/presentation/view/search_screen.dart';
 abstract class AppRouters {
   static const String kFirstRoute = '/first';
   static const String kdefultRoute = '/';
-  static const String kNotificationDetailsRoute = '/kNotificationDetailsRoute';
 
   static const String kLoginRoute = '/login';
   static const String kSignUpRoute = '/signup';
@@ -71,13 +69,6 @@ abstract class AppRouters {
       GoRoute(
         path: kFirstRoute,
         builder: (context, state) => const CustomBottomNaveBar(),
-      ),
-      GoRoute(
-        path: kNotificationDetailsRoute,
-        builder: (context, state) {
-          final Map<String, String>? data = state.extra as Map<String, String>?;
-          return NotificationDetailsScreen(data: data);
-        },
       ),
       GoRoute(
         path: kSearchScreen,
