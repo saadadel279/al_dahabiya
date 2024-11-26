@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/services/locator.dart';
 import 'core/services/notification/push_notification/push_notification.dart';
+ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,23 +25,22 @@ void main() async {
   ]);
   runApp(const AlDahabiya());
 }
-
 class AlDahabiya extends StatelessWidget {
   const AlDahabiya({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: const Size(360, 690),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (_, child) {
-          return MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(scaffoldBackgroundColor: Colors.white),
-            routerConfig: AppRouters.router,
-          );
-        });
+      designSize: const Size(360, 690),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (_, child) {
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+          routerConfig: AppRouters.router,
+        );
+      },
+    );
   }
 }

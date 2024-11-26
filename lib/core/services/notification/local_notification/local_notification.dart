@@ -3,14 +3,20 @@ import 'dart:developer';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../../../main.dart';
+import '../../../app_router.dart';
 
 class LocalNotificationService {
   static FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   static StreamController<NotificationResponse> streamController =
       StreamController();
-  static onTap(NotificationResponse notificationResponse) {
-    streamController.add(notificationResponse);
+  static void onTap(NotificationResponse notificationResponse) {
+    navigatorKey.currentContext?.go( AppRouters.kNotificationDetailsScreenRoute);
+
+
   }
 
   static Future init() async {

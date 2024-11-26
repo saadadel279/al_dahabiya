@@ -37,7 +37,7 @@ import '../feature/address/presentation/view/screen/address_screen.dart';
 import '../feature/my_orders/presentation/view/screen/my_orders_screen.dart';
 import '../feature/notification_drtails/presentation/notification_details_screen.dart';
 import '../feature/search/presentation/view/search_screen.dart';
-import 'package:al_dahabiya/main.dart';
+import 'path_to_your_navigator_key_definition.dart';
 abstract class AppRouters {
   static const String kFirstRoute = '/first';
   static const String kdefultRoute = '/';
