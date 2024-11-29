@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:al_dahabiya/core/api/dio_consumer.dart';
 import 'package:al_dahabiya/core/models/product_model.dart';
 import 'package:al_dahabiya/feature/Auth/featuers/login/data/repo/login_repo.dart';
@@ -28,6 +30,7 @@ import 'package:al_dahabiya/feature/sub_categories/presentation/view/sub_categor
 import 'package:al_dahabiya/feature/sub_categories/presentation/view_model/cubit/sub_categories_cubit.dart';
 import 'package:al_dahabiya/feature/sub_categorise_product.dart/presentation/view/sub_cateo_prod_screen.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -35,6 +38,7 @@ import 'package:go_router/go_router.dart';
 import '../feature/Auth/featuers/update_password/presentation/view/screen/update_password.dart';
 import '../feature/address/presentation/view/screen/address_screen.dart';
 import '../feature/my_orders/presentation/view/screen/my_orders_screen.dart';
+import '../feature/notification_drtails/presentation/background_notification_details_screen.dart';
 import '../feature/notification_drtails/presentation/notification_details_screen.dart';
 import '../feature/search/presentation/view/search_screen.dart';
 import 'package:al_dahabiya/main.dart';
@@ -42,6 +46,8 @@ abstract class AppRouters {
   static const String kFirstRoute = '/first';
   static const String kdefultRoute = '/';
   static const String kNotificationDetailsScreenRoute = '/kNotificationDetailsScreenRoute';
+  static const String kForegroundNotificationDetailsScreenRoute = '/kForegroundNotificationDetailsScreenRoute';
+
   static const String kLoginRoute = '/login';
   static const String kSignUpRoute = '/signup';
   static const String kHomeRoute = '/home';
@@ -75,7 +81,18 @@ abstract class AppRouters {
       ),
       GoRoute(
         path: kNotificationDetailsScreenRoute,
-        builder: (context, state) => const NotificationDetailsScreenScreen(),
+        builder: (context, state) {
+          final message = state.extra as RemoteMessage;
+          log(message.toString());
+          return NotificationDetailsScreenScreen(message: message, );
+      },
+      ),
+      GoRoute(
+        path: kForegroundNotificationDetailsScreenRoute,
+        builder: (context, state) {
+          final payload = state.extra as String;
+          return ForegroundNotificationDetailsScreen( payload:payload ,);
+        },
       ),
       GoRoute(
         path: kSearchScreen,

@@ -28,9 +28,17 @@ class PushNotification {
     FirebaseMessaging.onBackgroundMessage(handelOnbackgroundMessage);
     handelOnForegroundMessage();
 
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      _navigateToScreen(message);
+    });
 
-
-
+    firebaseMessaging.getInitialMessage().then(
+      (message) {
+        if (message != null) {
+          _navigateToScreen(message);
+        }
+      },
+    );
   }
 
   static Future<void> handelOnbackgroundMessage(RemoteMessage message) async {

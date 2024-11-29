@@ -16,9 +16,9 @@ class LocalNotificationService {
   static void onTap(NotificationResponse notificationResponse) {
     final payload = notificationResponse.payload;
 
-    navigatorKey.currentContext?.push( AppRouters.kForegroundNotificationDetailsScreenRoute,extra:payload );
-
-
+    navigatorKey.currentContext?.push(
+        AppRouters.kForegroundNotificationDetailsScreenRoute,
+        extra: payload);
   }
 
   static Future init() async {
@@ -33,14 +33,12 @@ class LocalNotificationService {
   }
 
   static void showBasicNotification(RemoteMessage message) async {
-    AndroidNotificationDetails android =  AndroidNotificationDetails(
+    AndroidNotificationDetails android = AndroidNotificationDetails(
       message.notification!.android!.channelId ?? '1',
       message.notification?.title ?? 'no title',
       importance: Importance.max,
       priority: Priority.high,
-
     );
-
 
     NotificationDetails details = NotificationDetails(
       android: android,
@@ -50,9 +48,31 @@ class LocalNotificationService {
       message.notification?.title,
       message.notification?.body,
       details,
-      payload:message.notification?.title,
-
+      payload: message.notification?.title,
     );
   }
 
+  static Future<void> showBasicNotificationFromSignalR({
+    required String title,
+    required String body,
+  }) async {
+    AndroidNotificationDetails android = const AndroidNotificationDetails(
+      'SignalR_Channel',
+      'SignalR Notifications',
+      importance: Importance.max,
+      priority: Priority.high,
+    );
+
+    NotificationDetails details = NotificationDetails(
+      android: android,
+    );
+
+    await flutterLocalNotificationsPlugin.show(
+      0,
+      title,
+      body,
+      details,
+      payload: title,
+    );
+  }
 }

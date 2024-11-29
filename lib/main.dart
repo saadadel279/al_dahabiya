@@ -9,22 +9,26 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/services/locator.dart';
 import 'core/services/notification/push_notification/push_notification.dart';
- final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+import 'core/services/signalR/SignalR_services.dart';
+
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await CacheHelper.init();
   setupServiceLocator();
 
   await Future.wait([
     PushNotification.init(),
     LocalNotificationService.init(),
+    SignalRService().connectToSignalR()
+
   ]);
+
   runApp(const AlDahabiya());
 }
+
 class AlDahabiya extends StatelessWidget {
   const AlDahabiya({super.key});
 
