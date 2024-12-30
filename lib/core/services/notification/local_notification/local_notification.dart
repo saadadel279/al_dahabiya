@@ -34,7 +34,7 @@ class LocalNotificationService {
 
   static void showBasicNotification(RemoteMessage message) async {
     AndroidNotificationDetails android =  AndroidNotificationDetails(
-      message.notification!.android!.channelId ?? '1',
+      message.notification!.android!.channelId ?? 'default_channel_id',
       message.notification?.title ?? 'no title',
       importance: Importance.max,
       priority: Priority.high,

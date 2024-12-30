@@ -21,7 +21,7 @@ class SignalRService {
         .withUrl(url, options: HttpConnectionOptions(requestTimeout: 20000))
         .build();
     connection!.on('MobileNotifiy', (args) {
-
+      //
       if (args != null && args.isNotEmpty) {
         try {
           log('message from SignalR: ${args[0].toString()}');
